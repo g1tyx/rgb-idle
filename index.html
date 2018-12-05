@@ -6,14 +6,14 @@
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="logmath.js"></script>
     <meta charset="utf-8" />
-    <title>RGB Idle</title>
+    <title>RBG放置 - RGB Idle</title>
 </head>
 <body onload="init()">
-    <div class="popup">The prism rises as you approach it, so many question you want it to answer yet it hovers there dead silent. You stick your hand out to reach for it and as you do all the light around you seems to fade. The blackness of the prism seems to consume everything, your spectrum fades out of exsistence.<br> The game is about to change, your 3 colored bars will no longer solely produce red, green and blue respectively. Now each bars production can be altered to produce a certain amount of the base 3 colors, your first prism mix is fixed.<br> Click here to proceed or Press 'esc' to cancel</div>
-    <div class="popup">You have reached the limit of the amount of colors your computer can process. You can now alter these color to become unstable yet allow you further growth.<br> Each unstable color will halve autobuyer interval.<br>Click here to proceed</div>
-    <div class="popup" style="font-size:1.5em">Your save has been copied to clipboard!</div>
-    <div class="popup" style="font-size:1.5em">You have finished a progress!</div>
-    <div class="button switch active" onclick="switchTab('RGB', 0)">RGB</div><div class="button hidden switch" onclick="switchTab('Spectrum', 1)">Spectrum</div><div class="button switch" onclick="switchTab('Settings', 2)">Settings</div><div class="button switch hidden" onclick="switchTab('Stats', 3)">Stats</div><br>
+    <div class="popup">当你接近它时，棱镜会升起，所以很多人质疑你想让它回答但是却在那里徘徊死了。 你伸出手来伸手去做，就像你所做的一样，你身边的所有光线似乎都会褪色。 棱镜的黑暗似乎消耗了一切，你的光谱逐渐消失。<br> 游戏即将改变，你的3个彩色条将不再分别单独产生红色，绿色和蓝色。 现在，每个条生产可以改变，以产生一定量的基体3种颜色，你的第一棱镜结构是固定的。<br> 单击此处继续或按“Esc”取消</div>
+    <div class="popup">您已达到计算机可处理的颜色数量限制。 您现在可以改变这些颜色以变得不稳定，但允许您进一步增长。<br> Each unstable color will halve autobuyer interval.<br>Click here to proceed</div>
+    <div class="popup" style="font-size:1.5em">您的存档已复制到剪贴板！</div>
+    <div class="popup" style="font-size:1.5em">你已经完成了一个进度！</div>
+    <div class="button switch active" onclick="switchTab('RGB', 0)">RGB</div><div class="button hidden switch" onclick="switchTab('Spectrum', 1)">光谱</div><div class="button switch" onclick="switchTab('Settings', 2)">设置</div><div class="button switch hidden" onclick="switchTab('Stats', 3)">统计</div><br>
     <div id="tabRGB" class="tab">
         <div style="width:100%;">
             <div class="count hidden extra" id="spectrumCountRGB"></div><div class="count hidden extra" id="blackCountRGB"></div>
@@ -21,7 +21,7 @@
         <div id="redDiv" style="padding-bottom:10px; padding-top:10px">
             <div class="progress" style="cursor:pointer">
                 <div id="redBar" class="bar"></div>
-            </div><div id="redCount" class="count" style="color: red;"></div><div id="redButton" class="button" style="background: red;" onclick="buyUpgrade('red')"><div>Increase Click Strength</div><div>Level 0</div><div>Price 5 Red</div></div><div id="redReduce" class="button hidden" style="background: red;width:100px" onclick="reduceProd('red')">Break Red</div>
+            </div><div id="redCount" class="count" style="color: red;"></div><div id="redButton" class="button" style="background: red;" onclick="buyUpgrade('red')"><div>增加点击强度</div><div>Level 0</div><div>Price 5 Red</div></div><div id="redReduce" class="button hidden" style="background: red;width:100px" onclick="reduceProd('red')">打破红色</div>
         </div>
 
         <div id="greenDiv" style="padding-bottom:10px; padding-top:10px">
@@ -29,17 +29,17 @@
                 <div id="greenBar" class="bar"></div>
             </div>
             <div id="greenCount" class="count" style="color: rgb(0,255,0);"></div>
-            <div id="greenButton" style="background: rgb(0,255,0);" class="button" onclick="buyUpgrade('green')"><div>Increase Auto Red Speed</div><div>Level 0</div><div>Price 5 Green</div></div>
-            <div id="greenReduce" class="button hidden" style="background: rgb(0,255,0);width:100px;" onclick="reduceProd('green')">Break Green</div>
+            <div id="greenButton" style="background: rgb(0,255,0);" class="button" onclick="buyUpgrade('green')"><div>提高自动红色速度</div><div>等级 0</div><div>价格：5绿色</div></div>
+            <div id="greenReduce" class="button hidden" style="background: rgb(0,255,0);width:100px;" onclick="reduceProd('green')">打破绿色</div>
         </div>
-        <div id="unlockBtn" class="hidden button" onclick="unlockBlue()" style="background:rgb(0,0,255); font-size:40px">Buy Blue bar for 50 green!</div>
+        <div id="unlockBtn" class="hidden button" onclick="unlockBlue()" style="background:rgb(0,0,255); font-size:40px">花费50绿色购买蓝色条</div>
         <div id="blueDiv" class="hidden" style="padding-bottom:10px; padding-top:10px">
             <div style="margin-bottom:10px">
                 <div class="progress">
                     <div id="blueBar" class="bar"></div>
                 </div><div id="blueCount" class="count" style="color: rgb(0,0,255);"></div>
             </div>
-            <div id="blueButton0" style="background: rgb(0,0,255);" class="button" onclick="buyUpgrade('blue', 0)"><div>Increase Clock Speed</div><div>Level 0</div><div>Price 5 blue</div><div></div></div><div id="blueButton1" style="background: rgb(0,0,255);" class="button" onclick="buyUpgrade('blue', 1)"><div>Increase Red Bar Gain</div><div>Level 0</div><div>Price 10 blue</div><div></div></div><div id="blueButton2" style="background: rgb(0,0,255);" class="button" onclick="buyUpgrade('blue', 2)"><div>Increase Green Bar Gain</div><div>Level 0</div><div>Price 15 blue</div><div></div></div><div id="blueButton3" style="background: rgb(0,0,255);" class="button" onclick="buyUpgrade('blue', 3)"><div>More Cores</div><div>level 0</div><div>Price 50 blue</div><div></div></div><div id="blueReduce" class="button hidden" style="background: blue;width:100px" onclick="reduceProd('blue')">Break Blue</div>
+            <div id="blueButton0" style="background: rgb(0,0,255);" class="button" onclick="buyUpgrade('blue', 0)"><div>提高时钟速度</div><div>等级 0</div><div>Price 5 blue</div><div></div></div><div id="blueButton1" style="background: rgb(0,0,255);" class="button" onclick="buyUpgrade('blue', 1)"><div>Increase Red Bar Gain</div><div>Level 0</div><div>Price 10 blue</div><div></div></div><div id="blueButton2" style="background: rgb(0,0,255);" class="button" onclick="buyUpgrade('blue', 2)"><div>Increase Green Bar Gain</div><div>Level 0</div><div>Price 15 blue</div><div></div></div><div id="blueButton3" style="background: rgb(0,0,255);" class="button" onclick="buyUpgrade('blue', 3)"><div>More Cores</div><div>level 0</div><div>Price 50 blue</div><div></div></div><div id="blueReduce" class="button hidden" style="background: blue;width:100px" onclick="reduceProd('blue')">Break Blue</div>
         </div>
         <div id="spectrumDiv" class="hidden" style="width: 100%; padding-bottom:10px; padding-top:10px; align-self:center; text-align:center;">
             <div class="button" id="redSplice" onclick="spliceColor('red')" style="background: rgb(255,0,0);"><div>Splice 10% red into a spectrum</div><div>Spliced red:</div></div>
@@ -123,20 +123,20 @@
         </div>
     </div>
     <div id="tabSettings" class="hidden tab">
-        <div class="count" style="text-align:center; width:90%;"> Settings</div><br>
+        <div class="count" style="text-align:center; width:90%;"> 设置</div><br>
         <div style="text-align:center">
             <table align="center">
-                <tr><td><div class="button setting" onclick="save()"><div>Save Game</div></div></td><td><div class="button setting" onclick="save('Export')"><div>Export</div></div></td><td><div class="button setting" onclick="load('Import')"><div>Import</div></div></td><td><div class="button setting" onclick="reset()"><div>Reset Game</div></div></td></tr>
-                <tr><td><div class="button setting" onclick="flip('fast')"><div>Fast Mode</div><div>Off</div></div></td><td><div class="button setting" onclick="flip('fps')"><div>FPS/UPS</div><div>Off</div></div></td><td><div class="button setting" onclick="flip('notation')"><div>Notation</div><div>Off</div></div></td></tr>
+                <tr><td><div class="button setting" onclick="save()"><div>保存游戏</div></div></td><td><div class="button setting" onclick="save('Export')"><div>导出</div></div></td><td><div class="button setting" onclick="load('Import')"><div>导入</div></div></td><td><div class="button setting" onclick="reset()"><div>重置游戏</div></div></td></tr>
+                <tr><td><div class="button setting" onclick="flip('fast')"><div>快速模式</div><div>关闭</div></div></td><td><div class="button setting" onclick="flip('fps')"><div>FPS/UPS</div><div>Off</div></div></td><td><div class="button setting" onclick="flip('notation')"><div>数字格式</div><div>关闭</div></div></td></tr>
             </table>
-            <h1>Hot Keys</h1>
+            <h1>快捷键</h1>
             <p style="font-size:25px">
-                Space: Holds down red <br>
-                R: Max buy red upgrades <br>
-                A: Toggle autobuyers<br>
-                G: Max buy green upgrades<br>
-                1-4: Max buy Blue Upgrades<br>
-                M: Max All
+                空格: 按下自动红色 <br>
+                R: 购买红色升级的最大值 <br>
+                A: 切换自动购买<br>
+                G: 购买绿色升级的最大值<br>
+                1-4: 购买蓝色升级的最大值<br>
+                M: 全部最大
             </p>
             <br />
             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
@@ -149,7 +149,7 @@
         </div>
     </div>
     <div id="tabStats" class="hidden tab" style="text-align:center">
-        <h1>Last 5 Spectrums</h1>
+        <h1>最近5个光谱</h1>
         <table align="center" id="last5" style="font-size:25px">
             <tr><td></td></tr>
             <tr><td></td></tr>
@@ -158,11 +158,18 @@
             <tr><td></td></tr>
         </table>
         <br>
-        <h1>Important Info</h1>
+        <h1>重要信息</h1>
         <div style="width:50%;margin-left:25%;">
             <div style="font-size:25px" id="timestat">Times specced is  currently x. This multiplies your spectrum gain by x.</div>
             <div style="font-size:25px" id="specstat">Times specced is  currently x. This multiplies your spectrum gain by x.</div>
         </div>
     </div>
+    <!--客服 开始-->
+<script src="https://likexia.gitee.io/game/js/jquery.min.js"></script>
+<link rel="stylesheet" href="https://likexia.gitee.io/game/css/kf.css" type="text/css" media="screen" charset="utf-8">
+<script src="https://likexia.gitee.io/game/js/kf.js"></script>
+<style>
+    .main-im{text-shadow: none;}</style>
+<!-- 客服 结束 -->
 </body>
 </html>

@@ -129,20 +129,20 @@ function incomeBarDisplay(name) {
         var c = ["R","G","B"]
         var show = [1, 1, 1];
         for (var i = 0; i < 3; i++) if (player.bars[name].color[i] === 0) show[i] = 0;
-        if (SumOf(show) === 0) elem.innerHTML = "~" + formatNum(displayIncome(name, "black")) + " Black/s";
-        else if (SumOf(show) == 3 && player.specbar[name]) elem.innerHTML = formatNum(displayIncome(name, "spectrum")) + " Spec/s";
-        else if (SumOf(show) == 1 && !player.progress.includes(8)) elem.innerHTML = formatNum(displayIncome(name, show.indexOf(1))) + "/s";
+        if (SumOf(show) === 0) elem.innerHTML = "~" + formatNum(displayIncome(name, "black")) + " 黑色/秒";
+        else if (SumOf(show) == 3 && player.specbar[name]) elem.innerHTML = formatNum(displayIncome(name, "spectrum")) + " 光谱/秒";
+        else if (SumOf(show) == 1 && !player.progress.includes(8)) elem.innerHTML = formatNum(displayIncome(name, show.indexOf(1))) + "/秒";
         else {
             elem.innerHTML = "";
             for (var i = 0; i < 3; i++) {
                 var temp = document.createElement("div");
                 temp.style.fontSize = (1 / SumOf(show)) + "em";
-                temp.innerHTML = c[i] + ": " + formatNum(displayIncome(name, i)) + "/s";
+                temp.innerHTML = c[i] + ": " + formatNum(displayIncome(name, i)) + "/秒";
                 if (SumOf(show) == 1 && player.progress.includes(8)) {
                     temp.style.fontSize = "0.5em";
                     if (i == 2) {
                         var tempb = document.createElement("div");
-                        tempb.innerHTML = "Black: " + formatNum(displayIncome(name, "miniBlack")) + "/s";
+                        tempb.innerHTML = "Black: " + formatNum(displayIncome(name, "miniBlack")) + "/秒";
                         tempb.style.fontSize = "0.5em";
                     }
                 }
@@ -150,13 +150,13 @@ function incomeBarDisplay(name) {
                 if(tempb) elem.appendChild(tempb);
             }
         }
-    }else elem.innerHTML = formatNum(displayIncome(name)) + "/s";
+    }else elem.innerHTML = formatNum(displayIncome(name)) + "/秒";
 }
 
 
 var render = {
     Prism: function () {
-        document.getElementById("blackCount").innerHTML = "You have " + formatNum(player.black) + " Blackness";
+        document.getElementById("blackCount").innerHTML = "你拥有 " + formatNum(player.black) + " 黑色";
         window.mixCost = 1;
         window.blackBar = false;
         window.colorBar = false;
@@ -173,7 +173,7 @@ var render = {
             return ret;
         }
         if (SumOf(player.bars.red.color) + SumOf(player.bars.green.color) + SumOf(player.bars.blue.color) === 255 * 9) {
-            if (player.prism.cost === 0) document.getElementById("blackCostInfo").innerHTML = "You are now ready to move on to a better prism! Pressing this button will reset you back to 1st prism, however you will retain log2(spectrum).";
+            if (player.prism.cost === 0) document.getElementById("blackCostInfo").innerHTML = "你现在准备好进入更好的棱镜了！ 按此按钮将重置为第1个棱镜，但是您将保留log2（光谱）。";
             else document.getElementById("blackCostInfo").innerHTML = "Destroy your prism for the " + suffix(player.prism.cost + 1) + " time and move forth to an even greater one! Pressing this button will reset you back to 1st prism, however you will retain log2(spectrum).";
             document.getElementById("costReset").style.borderColor = 'white';
             document.getElementById("costReset").style.borderWidth = '5';
@@ -193,8 +193,8 @@ var render = {
                 row.cells[3].innerHTML = "Black: <sup>" + formatNum(Log.multi(Log.multi(Log.multi(player.spectrum, player.spectrumLevel[18] === 1 ? Log.pow(player.prism.potencyEff[temp], Log.add(1,Log.floor(Log.div(player.prism.potency[temp],7)))) : player.prism.potencyEff[temp]), (player.spectrumLevel[1] + 1)), (player.progress.includes(3) ? Cores : 1)), 0) + "</sup>&frasl;<sub> " + formatNum(Log.max(Log.root(Log.multi(player.black, 1e100), 1 + Math.min(player.prism.cost / 10,0.5)), 1e100)) + "</sub>";
                 blackBar = true;
             } else if (player.prism.specbar[temp]) {
-                if (player.progress.includes(14)) row.cells[3].innerHTML = "Spectrum: " + formatNum(Math.pow(16, Math.floor(player.prism.potency[temp] / 5)), 0) + "x log<sub>10</sub>(prod)";
-                else row.cells[3].innerHTML = "Spectrum: log<sub>10</sub>(prod)";
+                if (player.progress.includes(14)) row.cells[3].innerHTML = "光谱: " + formatNum(Math.pow(16, Math.floor(player.prism.potency[temp] / 5)), 0) + "x log<sub>10</sub>(prod)";
+                else row.cells[3].innerHTML = "光谱: log<sub>10</sub>(prod)";
             }else {
                 row.cells[3].innerHTML = "<span></span><br><span></span><br><span></span>";
                 var tempcount = 0;
@@ -212,24 +212,24 @@ var render = {
 
             let node = document.getElementById('specpot').childNodes[i * 2 + 1];
             if (player.prism.specbar[temp]) {
-                node.innerHTML = 'Click here to make this color bar!';
+                node.innerHTML = '点击这里制作这个颜色条!';
                 node.style.backgroundColor = 'gold';
             } else {
                 node.style.backgroundColor = 'white';
                 if (row.cells[2].childNodes[0].value == 255 && row.cells[2].childNodes[2].value == 255 && row.cells[2].childNodes[4].value == 255) {
-                    if (player.prism.potency[temp] >= 5) node.innerHTML = 'Click here to make this Spectrum bar!';
-                    else node.innerHTML = 'You need 5 potency to make a Spectrum bar.';
-                } else node.innerHTML = 'You must first make the bar white.';
+                    if (player.prism.potency[temp] >= 5) node.innerHTML = '点击这里来制做这个光谱条！';
+                    else node.innerHTML = '你需要5效能来制作光谱条。';
+                } else node.innerHTML = '你必须先把进度条变成白色。';
             }
         }
         mixCost = Log.sub(mixCost, 1);
-        if (player.prism.active) document.getElementById("mixButton").innerHTML = "Create a New Color Mix<br>This will cost: " + formatNum(mixCost, 2) + " Blackness";
+        if (player.prism.active) document.getElementById("mixButton").innerHTML = "创建一个新的颜色组合<br>这将会花费: " + formatNum(mixCost, 2) + " 黑色";
         else document.getElementById("mixButton").innerHTML = "Activate the Prism and Embrace its Power!";
     },
     Upgrades : function(){
         for (var i = 0; i < player.spectrumLevel.length ; i++) {
             if (i != 5 && i != 4 && i != 9) document.getElementById("spectrumButton" + i).childNodes[1].innerHTML = SUInfo(i);
-            document.getElementById("spectrumButton" + i).childNodes[2].innerHTML = "Price: " + formatNum(SpecPrice[i], 0) + " Spectrum ";
+            document.getElementById("spectrumButton" + i).childNodes[2].innerHTML = "价格: " + formatNum(SpecPrice[i], 0) + " 光谱 ";
             if (player.spectrumLevel[i] == 1) document.getElementById("spectrumButton" + i).classList.add("bought");
             else document.getElementById("spectrumButton" + i).classList.remove("bought");
         }
@@ -252,32 +252,32 @@ var render = {
             document.getElementById(tempKey + "Count").innerHTML = formatNum(player.money[tempKey]);
             if (Log.get((tempKey == "red" ? Log.multi(Log.add(Log.div(auto, 1000 / player.options.fps), player.bars.red.mouse === 1 ? click : 0), IR) : (tempKey == "green" ? Log.div(Log.multi(Log.multi(Log.add(Log.div(auto, 1000 / player.options.fps), player.bars.red.mouse === 1 ? click : 0), IR), IG), 256) : Log.div(Log.multi(Log.multi(Log.multi(Log.add(Log.div(auto, 1000 / player.options.fps), player.bars.red.mouse === 1 ? click : 0), IR), IG), IB), 65536))), "log") > Math.log10(32)) incomeBarDisplay(tempKey);
             else document.getElementById(tempKey + "Bar").innerHTML = "";
-            document.getElementById(tempKey + "Splice").childNodes[0].innerHTML = "Splice " + player.level.blue[3] * 10 + "% " + tempKey + " into a spectrum";
-            document.getElementById(tempKey + "Splice").childNodes[1].innerHTML = "Spliced " + tempKey + ": " + formatNum(player.spliced[tempKey]);
+            document.getElementById(tempKey + "Splice").childNodes[0].innerHTML = "Splice " + player.level.blue[3] * 10 + "% " + cnText(tempKey) + " into a spectrum";
+            document.getElementById(tempKey + "Splice").childNodes[1].innerHTML = "Spliced " + cnText(tempKey) + ": " + formatNum(player.spliced[tempKey]);
             if (tempKey == "blue") {
                 for (var j = 0; j < 4; j++) {
-                    if (j == 0 && player.progress.includes(7)) document.getElementById(tempKey + "Button" + j).childNodes[1].innerHTML = "Level: " + formatNum(player.level[tempKey][j], 0) + "+" + Math.min(Math.floor(player.spectrumTimer / 360000), 10)
-                    else document.getElementById(tempKey + "Button" + j).childNodes[1].innerHTML = "Level: " + formatNum(player.level[tempKey][j], 0);
-                    document.getElementById(tempKey + "Button" + j).childNodes[2].innerHTML = "Price: " + formatNum(price[tempKey][j]) + " " + tempKey;
+                    if (j == 0 && player.progress.includes(7)) document.getElementById(tempKey + "Button" + j).childNodes[1].innerHTML = "等级: " + formatNum(player.level[tempKey][j], 0) + "+" + Math.min(Math.floor(player.spectrumTimer / 360000), 10)
+                    else document.getElementById(tempKey + "Button" + j).childNodes[1].innerHTML = "等级: " + formatNum(player.level[tempKey][j], 0);
+                    document.getElementById(tempKey + "Button" + j).childNodes[2].innerHTML = "价格: " + formatNum(price[tempKey][j]) + " " + cnText(tempKey);
                     switch (j) {
-                        case 0: document.getElementById(tempKey + "Button" + j).childNodes[3].innerHTML = "Current speed: " + formatNum(Clock, 0, "Hz");
+                        case 0: document.getElementById(tempKey + "Button" + j).childNodes[3].innerHTML = "当前速度: " + formatNum(Clock, 0, "Hz");
                             break
-                        case 1: document.getElementById(tempKey + "Button" + j).childNodes[3].innerHTML = "Current fill: " + (Log.get(Log.div(IR, 256),"l") >= 2 ? "~" + formatNum(Log.floor(Log.div(IR, 256)), 0) : (Log.get(Log.div(IR, 256),"n") >= 1 ? formatNum(Log.floor(Log.div(IR, 256)), 0) + " & " : "") + formatNum(Log.mod(IR, 256), 0) + "/256");
+                        case 1: document.getElementById(tempKey + "Button" + j).childNodes[3].innerHTML = "当前填充: " + (Log.get(Log.div(IR, 256),"l") >= 2 ? "~" + formatNum(Log.floor(Log.div(IR, 256)), 0) : (Log.get(Log.div(IR, 256),"n") >= 1 ? formatNum(Log.floor(Log.div(IR, 256)), 0) + " & " : "") + formatNum(Log.mod(IR, 256), 0) + "/256");
                             break
-                        case 2: document.getElementById(tempKey + "Button" + j).childNodes[3].innerHTML = "Current fill: " + (Log.get(Log.div(IG, 256),"l") >= 2 ? "~" + formatNum(Log.floor(Log.div(IG, 256)), 0) : (Log.get(Log.div(IG, 256),"n") >= 1 ? formatNum(Log.floor(Log.div(IG, 256)), 0) + " & " : "") + formatNum(Log.mod(IG , 256), 0) + "/256");
+                        case 2: document.getElementById(tempKey + "Button" + j).childNodes[3].innerHTML = "当前填充: " + (Log.get(Log.div(IG, 256),"l") >= 2 ? "~" + formatNum(Log.floor(Log.div(IG, 256)), 0) : (Log.get(Log.div(IG, 256),"n") >= 1 ? formatNum(Log.floor(Log.div(IG, 256)), 0) + " & " : "") + formatNum(Log.mod(IG , 256), 0) + "/256");
                             break
-                        case 3: document.getElementById(tempKey + "Button" + j).childNodes[3].innerHTML = "Core Count: " + formatNum(Cores, 0);
+                        case 3: document.getElementById(tempKey + "Button" + j).childNodes[3].innerHTML = "核心数量: " + formatNum(Cores, 0);
                             break
                     }
                 }
             } else {
-                    document.getElementById(tempKey + "Button").childNodes[0].innerHTML = tempKey == "red" ? "Increase Click Strength" : "Increase Auto Strength";
+                    document.getElementById(tempKey + "Button").childNodes[0].innerHTML = tempKey == "red" ? "增加点击强度" : "增加自动强度";
                     document.getElementById(tempKey + "Button").style.width = "";
-                    document.getElementById(tempKey + "Button").childNodes[2].innerHTML = "Price: " + formatNum(price[tempKey]) + " " + tempKey;
-                    document.getElementById(tempKey + "Button").childNodes[1].innerHTML = "Level: " + formatNum(player.level[tempKey], 0);
+                    document.getElementById(tempKey + "Button").childNodes[2].innerHTML = "价格: " + formatNum(price[tempKey]) + " " + cnText(tempKey);
+                    document.getElementById(tempKey + "Button").childNodes[1].innerHTML = "等级: " + formatNum(player.level[tempKey], 0);
             }
         }
-        document.getElementById("spectrumCountRGB").innerHTML = formatNum(player.spectrum, 0) + " Spectrum";
+        document.getElementById("spectrumCountRGB").innerHTML = formatNum(player.spectrum, 0) + " 光谱";
         document.getElementById("blackCountRGB").innerHTML = formatNum(player.black) + " Black";
         for (var i = 0; i < 3; i++) for (var j = 0; j < 5; j += 2) document.getElementById(Object.keys(player.money)[i] + "Prism").cells[2].childNodes[j].value = player.bars[Object.keys(player.money)[i]].color[j / 2];
     },
@@ -292,7 +292,7 @@ var render = {
     Stats: function () {
         var table = document.getElementById("last5");
         for (var i = 0; i < table.rows.length; i++) {
-            if (player.previousSpectrums[i].time != 0) table.rows[i].cells[0].innerHTML = (i == 0 ? "Your last Spectrum" : "Your Spectrum " + (i + 1) + " Spectrums ago") + " took " + (player.previousSpectrums[i].time >= 3600000 ? Math.floor(player.previousSpectrums[i].time / 3600000) + " hours and " + Math.floor((player.previousSpectrums[i].time % 3600000) / 60000) + " minutes" : (player.previousSpectrums[i].time >= 60000 ? Math.floor(player.previousSpectrums[i].time / 60000) + " minutes and " + Math.floor((player.previousSpectrums[i].time % 60000) / 1000) + " seconds" : (player.previousSpectrums[i].time >= 10000 ? Math.floor(player.previousSpectrums[i].time / 1000) + " seconds" : (player.previousSpectrums[i].time > 0 ? player.previousSpectrums[i].time + " millis" : 0)))) + " and earned you " + formatNum(player.previousSpectrums[i].amount, 0) + " Spectrum";
+            if (player.previousSpectrums[i].time != 0) table.rows[i].cells[0].innerHTML = (i == 0 ? "Your last Spectrum" : "Your Spectrum " + (i + 1) + " Spectrums ago") + " took " + (player.previousSpectrums[i].time >= 3600000 ? Math.floor(player.previousSpectrums[i].time / 3600000) + " hours and " + Math.floor((player.previousSpectrums[i].time % 3600000) / 60000) + " minutes" : (player.previousSpectrums[i].time >= 60000 ? Math.floor(player.previousSpectrums[i].time / 60000) + " minutes and " + Math.floor((player.previousSpectrums[i].time % 60000) / 1000) + " 秒" : (player.previousSpectrums[i].time >= 10000 ? Math.floor(player.previousSpectrums[i].time / 1000) + " 秒" : (player.previousSpectrums[i].time > 0 ? player.previousSpectrums[i].time + " millis" : 0)))) + " and earned you " + formatNum(player.previousSpectrums[i].amount, 0) + " 光谱";
         }
         if (player.progress.includes(16)) document.getElementById('specstat').innerHTML = 'Times specced is  currently ' + formatNum(player.specced, 0) + '. This multiplies your spectrum gain by ' + formatNum(1 + player.specced / 100, 2) +'x and your spectrum bar gain by ' +formatNum(Math.sqrt(player.specced),2)+'x.';
         else document.getElementById('specstat').innerHTML = 'Times specced is  currently ' + formatNum(player.specced,0) + '. This multiplies your spectrum gain by ' + formatNum(1 + player.specced / 100,2) + 'x.';
@@ -340,9 +340,9 @@ function pCheck(num) {
         case 4:
             if (p3 && Log.get(player.black,"l") >= 3 && !player.progress.includes(4)) {
                 player.progress.push(4);
-                document.getElementById("spectrumButton" + 4).childNodes[0].innerHTML = "Auto Buy Max Red Level Every " + 0.25 + "s";
-                document.getElementById("spectrumButton" + 5).childNodes[0].innerHTML = "Auto Buy Max Green Level Every " + 0.25 + "s";
-                document.getElementById("spectrumButton" + 9).childNodes[0].innerHTML = "Auto Buy Max Blue Upgrades Every " + 0.25 + "s";
+                document.getElementById("spectrumButton" + 4).childNodes[0].innerHTML = "自动购买最大红色等级每隔 " + 0.25 + "秒";
+                document.getElementById("spectrumButton" + 5).childNodes[0].innerHTML = "自动购买最大绿色等级每隔 " + 0.25 + "秒";
+                document.getElementById("spectrumButton" + 9).childNodes[0].innerHTML = "自动购买最大蓝色升级每隔 " + 0.25 + "秒";
                 ABInt = { red: 2000 / 8, green: 2000 / 8, blue: 2000 / 8 };
                 pop(3);
             }
@@ -636,15 +636,15 @@ function SUInfo(num){
         case 2:
             return "Base Bar Increase: " + (2 + player.spectrumLevel[2] * 2) + "/256";
         case 4:
-            return player.spectrumLevel[4] == 1 ? "<div onclick='ToggleAB(`red`)' class='button' style='height:100%;width:50%;background-color:" + (player.AB.red ? "green" : "red") + "'>" + (player.AB.red ? "On" : "Off") + "</div>" : "Buy Red Yourself!";
+            return player.spectrumLevel[4] == 1 ? "<div onclick='ToggleAB(`red`)' class='button' style='height:100%;width:50%;background-color:" + (player.AB.red ? "green" : "red") + "'>" + (player.AB.red ? "On" : "Off") + "</div>" : "自行购买红色!";
         case 5:
-            return player.spectrumLevel[5] == 1 ? "<div onclick='ToggleAB(`green`)' class='button' style='height:100%;width:50%;background-color:" + (player.AB.green ? "green" : "red") + "'>" + (player.AB.green ? "On" : "Off") + "</div>" : "Buy Green Yourself!";
+            return player.spectrumLevel[5] == 1 ? "<div onclick='ToggleAB(`green`)' class='button' style='height:100%;width:50%;background-color:" + (player.AB.green ? "green" : "red") + "'>" + (player.AB.green ? "On" : "Off") + "</div>" : "自行购买蓝色!";
         case 7:
             return "Current Multi per 10: " + (player.spectrumLevel[7] + 1) + "x";
         case 8:
             return "Current Multi per 10: " + (1.15 + player.spectrumLevel[8] * 0.15).toFixed(2-player.spectrumLevel[8]) + "x";
         case 9:
-            return player.spectrumLevel[9] == 1 ? "<div onclick='ToggleAB(`blue`)' class='button' style='height:100%;width:50%;background-color:" + (player.AB.blue ? "green" : "red") + "'>" + (player.AB.blue ? "On" : "Off") + "</div>" : "Buy Blue Yourself!";
+            return player.spectrumLevel[9] == 1 ? "<div onclick='ToggleAB(`blue`)' class='button' style='height:100%;width:50%;background-color:" + (player.AB.blue ? "green" : "red") + "'>" + (player.AB.blue ? "On" : "Off") + "</div>" : "自行购买蓝色!";
         case 10:
             return "R&G cost " + ((1 - PD) * 100) + "% less";
         case 11:
@@ -829,7 +829,7 @@ function save(name) {
         temp.bars = { red: { width: Log.get(player.bars.red.width,'n'), color: player.bars.red.color }, green: { width: Log.get(player.bars.green.width,'n'), color: player.bars.green.color }, blue: { width: Log.get(player.bars.blue.width,'n'), color: player.bars.blue.color }, };
         localStorage.setItem("RGBsave", btoa(JSON.stringify(temp)));
     }
-    console.log("Saved");
+    console.log("已保存");
 }
 
 function setupPlayer() {
@@ -1316,4 +1316,21 @@ function getColorPotency(name,color,prism) {
     return ret;
 }
 
-
+//汉化xx
+function cnText(text){
+    var cntext="";
+    var temp=text;
+    if(temp=="red"){
+        cntext="红色"
+    }else if(temp=="green"){
+        cntext="绿色"
+    }else if(temp=="blue"){
+        cntext="蓝色"
+    }else if(temp==""){
+        cntext=""
+    }else{
+console.log("需汉化的英文："+text);
+        return text;
+    }
+    return cntext;
+}
