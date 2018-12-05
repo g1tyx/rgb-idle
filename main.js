@@ -287,7 +287,7 @@ var render = {
     Settings: function () {
         document.getElementsByClassName("setting")[4].childNodes[1].innerHTML = player.options.fast ? "On" : "Off";
         document.getElementsByClassName("setting")[5].childNodes[1].innerHTML = player.options.fps;
-        document.getElementsByClassName("setting")[6].childNodes[1].innerHTML = "<b>" + player.options.notation + "</b>";
+        document.getElementsByClassName("setting")[6].childNodes[1].innerHTML = "<b>" + cnText(player.options.notation) + "</b>";
     },
     Stats: function () {
         var table = document.getElementById("last5");
@@ -920,7 +920,7 @@ function setupPlayer() {
 
 function load(name) {
     if (name == "Import") {
-        var temp = prompt("Enter you save:", "");
+        var temp = prompt("在这里粘贴你的存档代码:", "");
         if (temp != null && temp != undefined && temp != "" && temp != false) {
             try {
                 if (typeof (JSON.parse(atob(temp))) == 'object') {
@@ -1326,6 +1326,14 @@ function cnText(text){
         cntext="绿色"
     }else if(temp=="blue"){
         cntext="蓝色"
+    }else if(temp=="Scientific"){
+        cntext="科学计数法"
+    }else if(temp=="Default"){
+        cntext="默认"
+    }else if(temp==""){
+        cntext=""
+    }else if(temp==""){
+        cntext=""
     }else if(temp==""){
         cntext=""
     }else{
