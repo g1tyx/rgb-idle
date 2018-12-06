@@ -282,29 +282,29 @@ var render = {
         for (var i = 0; i < 3; i++) for (var j = 0; j < 5; j += 2) document.getElementById(Object.keys(player.money)[i] + "Prism").cells[2].childNodes[j].value = player.bars[Object.keys(player.money)[i]].color[j / 2];
     },
     Spectrum: function () {
-        document.getElementById("spectrumCount").innerHTML = "You have " + formatNum(player.spectrum, 0) + " Spectrum";
+        document.getElementById("spectrumCount").innerHTML = "你拥有 " + formatNum(player.spectrum, 0) + " 光谱";
     },
     Settings: function () {
-        document.getElementsByClassName("setting")[4].childNodes[1].innerHTML = player.options.fast ? "On" : "Off";
+        document.getElementsByClassName("setting")[4].childNodes[1].innerHTML = player.options.fast ? "开启" : "关闭";
         document.getElementsByClassName("setting")[5].childNodes[1].innerHTML = player.options.fps;
         document.getElementsByClassName("setting")[6].childNodes[1].innerHTML = "<b>" + cnText(player.options.notation) + "</b>";
     },
     Stats: function () {
         var table = document.getElementById("last5");
         for (var i = 0; i < table.rows.length; i++) {
-            if (player.previousSpectrums[i].time != 0) table.rows[i].cells[0].innerHTML = (i == 0 ? "Your last Spectrum" : "Your Spectrum " + (i + 1) + " Spectrums ago") + " took " + (player.previousSpectrums[i].time >= 3600000 ? Math.floor(player.previousSpectrums[i].time / 3600000) + " hours and " + Math.floor((player.previousSpectrums[i].time % 3600000) / 60000) + " minutes" : (player.previousSpectrums[i].time >= 60000 ? Math.floor(player.previousSpectrums[i].time / 60000) + " minutes and " + Math.floor((player.previousSpectrums[i].time % 60000) / 1000) + " 秒" : (player.previousSpectrums[i].time >= 10000 ? Math.floor(player.previousSpectrums[i].time / 1000) + " 秒" : (player.previousSpectrums[i].time > 0 ? player.previousSpectrums[i].time + " millis" : 0)))) + " and earned you " + formatNum(player.previousSpectrums[i].amount, 0) + " 光谱";
+            if (player.previousSpectrums[i].time != 0) table.rows[i].cells[0].innerHTML = (i == 0 ? "你的最后一个光谱" : "你的光谱 " + (i + 1) + " 光谱之前") + " 获得 " + (player.previousSpectrums[i].time >= 3600000 ? Math.floor(player.previousSpectrums[i].time / 3600000) + " 小时 " + Math.floor((player.previousSpectrums[i].time % 3600000) / 60000) + " 分钟" : (player.previousSpectrums[i].time >= 60000 ? Math.floor(player.previousSpectrums[i].time / 60000) + " 分钟 " + Math.floor((player.previousSpectrums[i].time % 60000) / 1000) + " 秒" : (player.previousSpectrums[i].time >= 10000 ? Math.floor(player.previousSpectrums[i].time / 1000) + " 秒" : (player.previousSpectrums[i].time > 0 ? player.previousSpectrums[i].time + " millis" : 0)))) + " 获得你的第 " + formatNum(player.previousSpectrums[i].amount, 0) + " 个光谱";
         }
-        if (player.progress.includes(16)) document.getElementById('specstat').innerHTML = 'Times specced is  currently ' + formatNum(player.specced, 0) + '. This multiplies your spectrum gain by ' + formatNum(1 + player.specced / 100, 2) +'x and your spectrum bar gain by ' +formatNum(Math.sqrt(player.specced),2)+'x.';
-        else document.getElementById('specstat').innerHTML = 'Times specced is  currently ' + formatNum(player.specced,0) + '. This multiplies your spectrum gain by ' + formatNum(1 + player.specced / 100,2) + 'x.';
-        let ret = 'You have wasted ' + formatTime(player.wastedTime + player.sleepingTime) + ' playing this broken game.<br>';
-        if (player.sleepingTime < 60000) ret += ' FYI it is not healthly to play this game 24/7 you should take a break seeing as you haven\'t done so yet!';
-        else if (player.sleepingTime > 3.154e12) ret += ' Hey Philipe I am on to you, don\'t even try to hide it! You used simulateTime a bit to much there.';
-        else if (player.sleepingTime + player.wastedTime > 3.154e+10) ret += ' You either love my game or you\'re Hunter, I can\'t tell which one.';
-        else if (player.sleepingTime > player.wastedTime * 100) ret += ' Hello is anybody there? Wait if you are ready this pls stop sleeping so much! You are sleeping ' + (player.sleepingTime / player.wastedTime).toFixed(1) + 'x more then you are playing my game. I need more attention!';
-        else if(player.sleepingTime > player.wastedTime) ret += ' Luckily you\'ve spent ' + (player.sleepingTime/(player.wastedTime + player.sleepingTime) * 100).toFixed(1) + '% of that time sleeping(or other IRL things).';
-        else if(player.sleepingTime < player.wastedTime) ret += 'Your insane, or you really like my game... You have been online ' + (player.wastedTime/(player.wastedTime + player.sleepingTime) * 100).toFixed(1) + '% of the time you have spent playing this game.';
-        else if (Math.floor(player.sleepingTime%60000) === Math.floor(player.wastedTime%60000)) ret += 'How is this possible you have been online for the same amount of minutes you\'ve been offline. This is an anomally!';
-        ret += '<br> Time online: ' + formatTime(player.wastedTime) + '<br> Time offline: '+ formatTime(player.sleepingTime);
+        if (player.progress.includes(16)) document.getElementById('specstat').innerHTML = '当前已显示时间 ' + formatNum(player.specced, 0) + '. This multiplies your spectrum gain by ' + formatNum(1 + player.specced / 100, 2) +'x and your spectrum bar gain by ' +formatNum(Math.sqrt(player.specced),2)+'x.';
+        else document.getElementById('specstat').innerHTML = '时间斑点当前是 ' + formatNum(player.specced,0) + '. 这会使您的光谱增益倍增 ' + formatNum(1 + player.specced / 100,2) + 'x.';
+        let ret = '你已经浪费了 ' + formatTime(player.wastedTime + player.sleepingTime) + ' 玩这个坏掉的游戏。<br>';
+        if (player.sleepingTime < 60000) ret += ' 仅供参考，每周7天，每天24小时玩这个游戏是不健康的，你应该休息一下，因为你还没有这样做！';
+        else if (player.sleepingTime > 3.154e12) ret += ' 嘿，菲利普，我抓到你了，不要试图掩盖它！ 你在那里使用了模拟时间。';
+        else if (player.sleepingTime + player.wastedTime > 3.154e+10) ret += ' 你要么喜欢我的游戏，要么你是猎人，我无法分辨你是哪一种。';
+        else if (player.sleepingTime > player.wastedTime * 100) ret += ' 你好，有人吗？ 如果你准备好等等，请停止睡觉！ 你睡眠了 ' + (player.sleepingTime / player.wastedTime).toFixed(1) + 'x 超过了玩我的游戏。我需要更多关注！';
+        else if(player.sleepingTime > player.wastedTime) ret += ' 幸运的是有 ' + (player.sleepingTime/(player.wastedTime + player.sleepingTime) * 100).toFixed(1) + '% 的游戏时间是后台运行的(或者其他 IRL 事情)。';
+        else if(player.sleepingTime < player.wastedTime) ret += '你疯了，或者你真的很喜欢我的游戏... 你已经在线 ' + (player.wastedTime/(player.wastedTime + player.sleepingTime) * 100).toFixed(1) + '% ，您玩这个游戏的时间。';
+        else if (Math.floor(player.sleepingTime%60000) === Math.floor(player.wastedTime%60000)) ret += '您是如何在离线的相同时间内上网的。 这是一个异常现象！';
+        ret += '<br> 在线时间: ' + formatTime(player.wastedTime) + '<br> 离线时间: '+ formatTime(player.sleepingTime);
         document.getElementById('timestat').innerHTML = ret;
     },
     Progress: function () {
@@ -632,29 +632,29 @@ function buyUpgrade(name, Bindex) {
 function SUInfo(num){
     switch(num){
         case 0:
-            return "Current CM: " + Math.max(Math.log10(player.CM), 1).toFixed(1) + "x";
+            return "当前 CM: " + Math.max(Math.log10(player.CM), 1).toFixed(1) + "x";
         case 2:
-            return "Base Bar Increase: " + (2 + player.spectrumLevel[2] * 2) + "/256";
+            return "基础进度条提升: " + (2 + player.spectrumLevel[2] * 2) + "/256";
         case 4:
-            return player.spectrumLevel[4] == 1 ? "<div onclick='ToggleAB(`red`)' class='button' style='height:100%;width:50%;background-color:" + (player.AB.red ? "green" : "red") + "'>" + (player.AB.red ? "On" : "Off") + "</div>" : "自行购买红色!";
+            return player.spectrumLevel[4] == 1 ? "<div onclick='ToggleAB(`red`)' class='button' style='height:100%;width:50%;background-color:" + (player.AB.red ? "green" : "red") + "'>" + (player.AB.red ? "开启" : "关闭") + "</div>" : "自行购买红色!";
         case 5:
-            return player.spectrumLevel[5] == 1 ? "<div onclick='ToggleAB(`green`)' class='button' style='height:100%;width:50%;background-color:" + (player.AB.green ? "green" : "red") + "'>" + (player.AB.green ? "On" : "Off") + "</div>" : "自行购买蓝色!";
+            return player.spectrumLevel[5] == 1 ? "<div onclick='ToggleAB(`green`)' class='button' style='height:100%;width:50%;background-color:" + (player.AB.green ? "green" : "red") + "'>" + (player.AB.green ? "开启" : "关闭") + "</div>" : "自行购买蓝色!";
         case 7:
-            return "Current Multi per 10: " + (player.spectrumLevel[7] + 1) + "x";
+            return "当前加成每 10: " + (player.spectrumLevel[7] + 1) + "x";
         case 8:
-            return "Current Multi per 10: " + (1.15 + player.spectrumLevel[8] * 0.15).toFixed(2-player.spectrumLevel[8]) + "x";
+            return "当前加成每 10: " + (1.15 + player.spectrumLevel[8] * 0.15).toFixed(2-player.spectrumLevel[8]) + "x";
         case 9:
-            return player.spectrumLevel[9] == 1 ? "<div onclick='ToggleAB(`blue`)' class='button' style='height:100%;width:50%;background-color:" + (player.AB.blue ? "green" : "red") + "'>" + (player.AB.blue ? "On" : "Off") + "</div>" : "自行购买蓝色!";
+            return player.spectrumLevel[9] == 1 ? "<div onclick='ToggleAB(`blue`)' class='button' style='height:100%;width:50%;background-color:" + (player.AB.blue ? "green" : "red") + "'>" + (player.AB.blue ? "开启" : "关闭") + "</div>" : "自行购买蓝色!";
         case 10:
-            return "R&G cost " + ((1 - PD) * 100) + "% less";
+            return "红&绿 成本降低 " + ((1 - PD) * 100) + "%";
         case 11:
-            return "Current Multi: " + formatNum(player.level.red,0) + "x";
+            return "当前加成: " + formatNum(player.level.red,0) + "x";
         case 12:
-            return "Current Multi: " + formatNum(Log.max(Log.floor(player.spectrum),1), 0) + "x";
+            return "当前加成: " + formatNum(Log.max(Log.floor(player.spectrum),1), 0) + "x";
         case 14:
-            return "Base Core Count: " + (player.spectrumLevel[13] == 1 ? 8 : 1);
+            return "基础核心数量: " + (player.spectrumLevel[13] == 1 ? 8 : 1);
         case 16:
-            return "Increase Blue: ~" + formatNum(Log.round(Log.div(IB,256)));
+            return "蓝色提升: ~" + formatNum(Log.round(Log.div(IB,256)));
         default:
             return "";
     }
@@ -860,7 +860,7 @@ function setupPlayer() {
             if (player.version < 1.12) {
                 player.sleepingTime = 0;
                 player.wastedTime = 0;
-                alert('RGB Idle has updated, hope you enjoy the new stuff! \n Current Version: 1.12');
+                alert('RGB放置已更新, 希望你喜欢新的东西! \n 当前版本号: 1.12');
             }
             while (player.spectrumLevel.length < 21) player.spectrumLevel.push(-1);
         if (player.unlock) document.getElementById('blueDiv').classList.remove('hidden');
@@ -888,18 +888,18 @@ function setupPlayer() {
         document.getElementById("spectrumButton" + 4).childNodes[1].innerHTML = SUInfo(4);
         document.getElementById("spectrumButton" + 5).childNodes[1].innerHTML = SUInfo(5);
         document.getElementById("spectrumButton" + 9).childNodes[1].innerHTML = SUInfo(9);
-        document.getElementById("spectrumButton" + 4).childNodes[0].innerHTML = "Auto Buy Max Red Level Every " + formatNum(2 / (player.progress.includes(4) ? 8 : 1)) + "s";
-        document.getElementById("spectrumButton" + 5).childNodes[0].innerHTML = "Auto Buy Max Green Level Every " + formatNum(2 / (player.progress.includes(4) ? 8 : 1)) + "s";
-        document.getElementById("spectrumButton" + 9).childNodes[0].innerHTML = "Auto Buy Max Blue Upgrades Every " + formatNum(2 / (player.progress.includes(4) ? 8 : 1)) + "s";
+        document.getElementById("spectrumButton" + 4).childNodes[0].innerHTML = "每次自动购买最大红色等级每隔 " + formatNum(2 / (player.progress.includes(4) ? 8 : 1)) + "秒";
+        document.getElementById("spectrumButton" + 5).childNodes[0].innerHTML = "每次自动购买最大绿色等级每隔 " + formatNum(2 / (player.progress.includes(4) ? 8 : 1)) + "秒";
+        document.getElementById("spectrumButton" + 9).childNodes[0].innerHTML = "每次自动购买最大蓝色升级每隔 " + formatNum(2 / (player.progress.includes(4) ? 8 : 1)) + "秒";
         ABInt = { red: 2000 / (player.progress.includes(4) ? 8 : 1), green: 2000 / (player.progress.includes(4) ? 8 : 1), blue: 2000 / (player.progress.includes(4) ? 8 : 1)};
         player.CM = Math.max(player.CM, 1);
         let btn = document.getElementById('potencyBtn');
         if (player.prism.potency.total > 0) {
-            btn.childNodes[0].innerHTML = 'You have ' + formatNum(player.prism.potency.points,0) + ' potency, out of a total of ' + formatNum(player.prism.potency.total,0);
-            btn.childNodes[2].innerHTML = 'Increase potency for ' + formatNum(Math.pow(10, player.prism.potency.total/2 + 3), 0) + ' Spectrum';
+            btn.childNodes[0].innerHTML = '你拥有 ' + formatNum(player.prism.potency.points,0) + ' 潜能, out of a total of ' + formatNum(player.prism.potency.total,0);
+            btn.childNodes[2].innerHTML = '提高效果 ' + formatNum(Math.pow(10, player.prism.potency.total/2 + 3), 0) + ' 光谱';
         } else {
-            btn.childNodes[0].innerHTML = 'Escape the loss of power. Remove your negative potency.';
-            btn.childNodes[2].innerHTML = 'This requires you to channel 100 spectrum.';
+            btn.childNodes[0].innerHTML = '逃避失去力量。 消除你的负面效果。';
+            btn.childNodes[2].innerHTML = '这需要你传播100个光谱。';
         }
 
         let names = ['red', 'green', 'blue']
