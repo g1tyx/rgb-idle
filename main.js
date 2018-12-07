@@ -252,8 +252,8 @@ var render = {
             document.getElementById(tempKey + "Count").innerHTML = formatNum(player.money[tempKey]);
             if (Log.get((tempKey == "red" ? Log.multi(Log.add(Log.div(auto, 1000 / player.options.fps), player.bars.red.mouse === 1 ? click : 0), IR) : (tempKey == "green" ? Log.div(Log.multi(Log.multi(Log.add(Log.div(auto, 1000 / player.options.fps), player.bars.red.mouse === 1 ? click : 0), IR), IG), 256) : Log.div(Log.multi(Log.multi(Log.multi(Log.add(Log.div(auto, 1000 / player.options.fps), player.bars.red.mouse === 1 ? click : 0), IR), IG), IB), 65536))), "log") > Math.log10(32)) incomeBarDisplay(tempKey);
             else document.getElementById(tempKey + "Bar").innerHTML = "";
-            document.getElementById(tempKey + "Splice").childNodes[0].innerHTML = "Splice " + player.level.blue[3] * 10 + "% " + cnText(tempKey) + " into a spectrum";
-            document.getElementById(tempKey + "Splice").childNodes[1].innerHTML = "Spliced " + cnText(tempKey) + ": " + formatNum(player.spliced[tempKey]);
+            document.getElementById(tempKey + "Splice").childNodes[0].innerHTML = "拼接 " + player.level.blue[3] * 10 + "% " + cnText(tempKey) + " 成为光谱";
+            document.getElementById(tempKey + "Splice").childNodes[1].innerHTML = "拼接 " + cnText(tempKey) + ": " + formatNum(player.spliced[tempKey]);
             if (tempKey == "blue") {
                 for (var j = 0; j < 4; j++) {
                     if (j == 0 && player.progress.includes(7)) document.getElementById(tempKey + "Button" + j).childNodes[1].innerHTML = "等级: " + formatNum(player.level[tempKey][j], 0) + "+" + Math.min(Math.floor(player.spectrumTimer / 360000), 10)
@@ -715,13 +715,13 @@ function CalcSRgain() {
         if (player.progress.includes(6)) SR = Log.multi(SR, Log.add(1, Log.div(player.level.blue[3], 10)));
         if (player.progress.includes(9)) SR = Log.multi(SR, Log.add(1, Log.log10(Log.max(Log.div(player.spectrumTimer, 60000), 1))));
         SR = Log.max(Log.sub(SR, 1),0);
-        document.getElementById("spectrumReset").childNodes[0].innerHTML = "Reset all progress and gain";
-        if (player.progress.includes(5) && Log.get(SR5,'l') > Log.get(Log.multi(SR,1.05),'l')) document.getElementById("spectrumReset").childNodes[1].innerHTML = "<b>" + formatNum(Log.floor(SR), 0) + "(" + formatNum(Log.floor(SR5), 0) + ") Spectrum</b>";
-        else document.getElementById("spectrumReset").childNodes[1].innerHTML = "<b>" + formatNum(Log.floor(SR), 0) + " Spectrum</b>";
+        document.getElementById("spectrumReset").childNodes[0].innerHTML = "重置全部进度并获得";
+        if (player.progress.includes(5) && Log.get(SR5,'l') > Log.get(Log.multi(SR,1.05),'l')) document.getElementById("spectrumReset").childNodes[1].innerHTML = "<b>" + formatNum(Log.floor(SR), 0) + "(" + formatNum(Log.floor(SR5), 0) + ") 光谱</b>";
+        else document.getElementById("spectrumReset").childNodes[1].innerHTML = "<b>" + formatNum(Log.floor(SR), 0) + " 光谱</b>";
         if (Log.get(SR, 'l') >= 3 || (player.progress.includes(5) && Log.get(SR5, 'l') >= 3 )) {
-            if (player.progress.includes(5)) document.getElementById("spectrumReset").childNodes[2].innerHTML = formatNum(Log.get(Log.div(SR5, player.spectrumTimer / 60000), 'num')) + "/min";
-                else document.getElementById("spectrumReset").childNodes[2].innerHTML = formatNum(Log.get(Log.div(SR, player.spectrumTimer / 60000), 'num')) + "/min";
-        } else document.getElementById("spectrumReset").childNodes[2].innerHTML = formatNum(Log.multi(Log.mod(SR, 1), 100)) + "% towards next";
+            if (player.progress.includes(5)) document.getElementById("spectrumReset").childNodes[2].innerHTML = formatNum(Log.get(Log.div(SR5, player.spectrumTimer / 60000), 'num')) + "/分钟";
+                else document.getElementById("spectrumReset").childNodes[2].innerHTML = formatNum(Log.get(Log.div(SR, player.spectrumTimer / 60000), 'num')) + "/分钟";
+        } else document.getElementById("spectrumReset").childNodes[2].innerHTML ="到达下一个光谱的进度: " + formatNum(Log.multi(Log.mod(SR, 1), 100)) + "%";
         if (player.advSpec.unlock) {
                 var prevmulti = player.advSpec.multi;
                 player.advSpec.multi = parseInt(document.getElementById("advSpectrumReset").childNodes[1].childNodes[0].value);
