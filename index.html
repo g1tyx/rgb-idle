@@ -1,46 +1,30 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
-    <meta name="viewport" content="minimal-ui,user-scalable=no">
     <link rel="stylesheet" type="text/css" href="interface.css" />
     <script type="text/javascript" src="main.js"></script>
     <script type="text/javascript" src="logmath.js"></script>
     <meta charset="utf-8" />
-    <title>RBG放置 - RGB Idle</title>
+    <title>RGB Idle</title>
 </head>
-
 <body onload="init()">
     <div class="popup">当你接近它时，棱镜会升起，所以很多人质疑你想让它回答但是却在那里徘徊死了。 你伸出手来伸手去做，就像你所做的一样，你身边的所有光线似乎都会褪色。 棱镜的黑暗似乎消耗了一切，你的光谱逐渐消失。
         <br> 游戏即将改变，你的3个彩色条将不再分别单独产生红色，绿色和蓝色。 现在，每个条生产可以改变，以产生一定量的基体3种颜色，你的第一棱镜结构是固定的。
         <br> 单击此处继续或按“Esc”取消</div>
-    <div class="popup">您已达到计算机可处理的颜色数量限制。 您现在可以改变这些颜色以变得不稳定，但允许您进一步增长。
-        <br> Each unstable color will halve autobuyer interval.
-        <br>Click here to proceed</div>
+    <div class="popup">您已达到计算机可处理的颜色数量限制。 您现在可以改变这些颜色以变得不稳定，但允许您进一步增长。每个不稳定的颜色会减少一半自动购买者时间间隔。<br>点击此处继续</div>
     <div class="popup" style="font-size:1.5em">您的存档已复制到剪贴板！</div>
     <div class="popup" style="font-size:1.5em">你已经完成了一个进度！</div>
-    <div class="button switch active" onclick="switchTab('RGB', 0)">RGB</div>
-    <div class="button hidden switch" onclick="switchTab('Spectrum', 1)">光谱</div>
-    <div class="button switch" onclick="switchTab('Settings', 2)">设置</div>
-    <div class="button switch hidden" onclick="switchTab('Stats', 3)">统计</div>
-    <br>
+    <div class="button switch active" onclick="switchTab('RGB', 0)">RGB</div><div class="button hidden switch" onclick="switchTab('Spectrum', 1)">光谱</div><div class="button switch" onclick="switchTab('Settings', 2)">设置</div><div class="button switch hidden" onclick="switchTab('Stats', 3)">统计</div><br>
     <div id="tabRGB" class="tab">
         <div style="width:100%;">
-            <div class="count hidden extra" id="spectrumCountRGB"></div>
-            <div class="count hidden extra" id="blackCountRGB"></div>
+            <div class="count hidden extra" id="spectrumCountRGB"></div><div class="count hidden extra" id="blackCountRGB"></div>
         </div>
         <div id="redDiv" style="padding-bottom:10px; padding-top:10px">
             <div class="progress" style="cursor:pointer">
                 <div id="redBar" class="bar"></div>
-            </div>
-            <div id="redCount" class="count" style="color: red;"></div>
-            <div id="redButton" class="button" style="background: red;" onclick="buyUpgrade('red')">
-                <div>增加点击强度</div>
-                <div>Level 0</div>
-                <div>价格 5 Red</div>
-            </div>
-            <div id="redReduce" class="button hidden" style="background: red;width:100px" onclick="reduceProd('red')">打破红色</div>
+            </div><div id="redCount" class="count" style="color: red;"></div><div id="redButton" class="button" style="background: red;" onclick="buyUpgrade('red')"><div>增加点击强度</div><div>等级 0</div><div>价格 5 红色</div></div><div id="redReduce" class="button hidden" style="background: red;width:100px" onclick="reduceProd('red')">打破红色</div>
         </div>
 
         <div id="greenDiv" style="padding-bottom:10px; padding-top:10px">
@@ -48,353 +32,67 @@
                 <div id="greenBar" class="bar"></div>
             </div>
             <div id="greenCount" class="count" style="color: rgb(0,255,0);"></div>
-            <div id="greenButton" style="background: rgb(0,255,0);" class="button" onclick="buyUpgrade('green')">
-                <div>提高自动红色速度</div>
-                <div>等级 0</div>
-                <div>价格：5绿色</div>
-            </div>
+            <div id="greenButton" style="background: rgb(0,255,0);" class="button" onclick="buyUpgrade('green')"><div>提高自动红色速度</div><div>等级 0</div><div>价格：5绿色</div></div>
             <div id="greenReduce" class="button hidden" style="background: rgb(0,255,0);width:100px;" onclick="reduceProd('green')">打破绿色</div>
         </div>
-        <div id="unlockBtn" class="hidden button" onclick="unlockBlue()" style="background:rgb(0,0,255); font-size:40px">花费50绿色购买蓝色条</div>
+        <div id="unlockBtn" class="hidden button" onclick="unlockBlue()" style="background:rgb(0,0,255); font-size:40px">花费50绿色购买蓝色条!</div>
         <div id="blueDiv" class="hidden" style="padding-bottom:10px; padding-top:10px">
             <div style="margin-bottom:10px">
                 <div class="progress">
                     <div id="blueBar" class="bar"></div>
-                </div>
-                <div id="blueCount" class="count" style="color: rgb(0,0,255);"></div>
+                </div><div id="blueCount" class="count" style="color: rgb(0,0,255);"></div>
             </div>
-            <div id="blueButton0" style="background: rgb(0,0,255);" class="button" onclick="buyUpgrade('blue', 0)">
-                <div>提高时钟速度</div>
-                <div>等级 0</div>
-                <div>价格 5 蓝色</div>
-                <div></div>
-            </div>
-            <div id="blueButton1" style="background: rgb(0,0,255);" class="button" onclick="buyUpgrade('blue', 1)">
-                <div>增加红色条收益</div>
-                <div>等级 0</div>
-                <div>价格 10 蓝色</div>
-                <div></div>
-            </div>
-            <div id="blueButton2" style="background: rgb(0,0,255);" class="button" onclick="buyUpgrade('blue', 2)">
-                <div>增加绿色条收益</div>
-                <div>等级 0</div>
-                <div>价格 15 蓝色</div>
-                <div></div>
-            </div>
-            <div id="blueButton3" style="background: rgb(0,0,255);" class="button" onclick="buyUpgrade('blue', 3)">
-                <div>更多核心</div>
-                <div>等级 0</div>
-                <div>价格 50 蓝色</div>
-                <div></div>
-            </div>
-            <div id="blueReduce" class="button hidden" style="background: blue;width:100px" onclick="reduceProd('blue')">打破蓝色</div>
+            <div id="blueButton0" style="background: rgb(0,0,255);" class="button" onclick="buyUpgrade('blue', 0)"><div>提高时钟速度</div><div>等级 0</div><div>价格 5 蓝色</div><div></div></div><div id="blueButton1" style="background: rgb(0,0,255);" class="button" onclick="buyUpgrade('blue', 1)"><div>增加红色条收益</div><div>等级 0</div><div>价格 10 蓝色</div><div></div></div><div id="blueButton2" style="background: rgb(0,0,255);" class="button" onclick="buyUpgrade('blue', 2)"><div>增加绿色条收益</div><div>等级 0</div><div>价格 15 蓝色</div><div></div></div><div id="blueButton3" style="background: rgb(0,0,255);" class="button" onclick="buyUpgrade('blue', 3)"><div>更多核心</div><div>等级 0</div><div>价格 50 蓝色</div><div></div></div><div id="blueReduce" class="button hidden" style="background: blue;width:100px" onclick="reduceProd('blue')">打破蓝色</div>
         </div>
         <div id="spectrumDiv" class="hidden" style="width: 100%; padding-bottom:10px; padding-top:10px; align-self:center; text-align:center;">
-            <div class="button" id="redSplice" onclick="spliceColor('red')" style="background: rgb(255,0,0);">
-                <div>将10％的红色拼接成光谱</div>
-                <div>已拼接红色:</div>
-            </div>
-            <div class="button" id="greenSplice" onclick="spliceColor('green')" style="background: rgb(0,255,0);">
-                <div>将10％的绿色拼接成光谱</div>
-                <div>已拼接绿色:</div>
-            </div>
-            <div class="button" id="blueSplice" onclick="spliceColor('blue')" style="background: rgb(0,0,255);">
-                <div>将10％的蓝色拼接成光谱</div>
-                <div>已拼接蓝色:</div>
-            </div>
+            <div class="button" id="redSplice" onclick="spliceColor('red')" style="background: rgb(255,0,0);"><div>将10％的红色拼接成光谱</div><div>已拼接红色:</div></div>
+            <div class="button" id="greenSplice" onclick="spliceColor('green')" style="background: rgb(0,255,0);"><div>将10％的绿色拼接成光谱</div><div>已拼接绿色:</div></div>
+            <div class="button" id="blueSplice" onclick="spliceColor('blue')" style="background: rgb(0,0,255);"> <div>将10％的蓝色拼接成光谱</div><div>已拼接蓝色:</div></div>
             <br>
             <br>
-            <div id="spectrumReset" onclick="reset(1)" class="button" style=" background:white; text-shadow:none;  color:black;">
-                <div>重置所有进度和收益</div>
-                <div></div>
-                <div></div>
-            </div>
-            <div id="advSpectrumReset" onclick="" class="button hidden" style=" background:white; text-shadow:none;  color:black;">
-                <div>Multi your spectrum</div>
-                <div>
-                    <input type="range" min="1" max="50" value="1" class="slider black" onchange="CalcSRgain()" />
-                </div>
-                <div></div>
-            </div>
+            <div id="spectrumReset" onclick="reset(1)" class="button" style=" background:white; text-shadow:none;  color:black;"><div>重置所有进度和收益</div><div></div><div></div></div><div id="advSpectrumReset" onclick="" class="button hidden" style=" background:white; text-shadow:none;  color:black;"><div>加成你的光谱</div><div><input type="range" min="1" max="50" value="1" class="slider black" onchange="CalcSRgain()" /></div><div></div></div>
         </div>
     </div>
     <div id="tabSpectrum" class="hidden tab">
-        <div style="text-align:center;padding-top:100px;font-size:25px">
-            <p>我希望我有一个可以实际模拟全频谱的双核处理器。</p>
-        </div>
+        <div style="text-align:center;padding-top:100px;font-size:25px"><p>我希望我有一个可以实际模拟全频谱的双核处理器。</p></div>
         <div style="text-align:center" class="hidden">
-            <div id="spectrumCount" class="count" style="text-align:center; width:90%;"></div>
-            <br>
-            <div class="button switch active" onclick="switchTab('Upgrades', 0, 'spectrum')">升级</div>
-            <div class="button hidden switch" onclick="switchTab('Prism', 1, 'spectrum')">棱镜</div>
-            <div class="button hidden switch" onclick="switchTab('Progress', 2, 'spectrum')">进度</div>
+            <div id="spectrumCount" class="count" style="text-align:center; width:90%;"></div><br>
+            <div class="button switch active" onclick="switchTab('Upgrades', 0, 'spectrum')">升级</div><div class="button hidden switch" onclick="switchTab('Prism', 1, 'spectrum')">棱镜</div><div class="button hidden switch" onclick="switchTab('Progress', 2, 'spectrum')">进度</div>
             <div id="tabUpgrades" class="tab">
                 <table align="center">
-                    <tr>
-                        <td>
-                            <div id="spectrumButton0" class="button spec" onclick="buyUpgrade('spectrum', 0)">
-                                <div>单击多重效果自动</div>
-                                <div>未购买</div>
-                                <div>价格 5 光谱</div>
-                                <div></div>
-                            </div>
-                        </td>
-                        <td>
-                            <div id="spectrumButton1" class="button spec" onclick="buyUpgrade('spectrum', 1)">
-                                <div>所有进度条双倍输出</div>
-                                <div>未购买</div>
-                                <div>价格 5 光谱</div>
-                                <div></div>
-                            </div>
-                        </td>
-                        <td>
-                            <div id="spectrumButton2" class="button spec" onclick="buyUpgrade('spectrum', 2)">
-                                <div>进度条收益翻倍 (红&绿)</div>
-                                <div>未购买</div>
-                                <div>价格 5 光谱</div>
-                                <div></div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div id="spectrumButton3" class="button spec" onclick="buyUpgrade('spectrum', 3)">
-                                <div>Click Multi only Resets on Spectrum</div>
-                                <div>未购买</div>
-                                <div>价格 5 光谱</div>
-                                <div></div>
-                            </div>
-                        </td>
-                        <td>
-                            <div id="spectrumButton4" class="button spec" onclick="buyUpgrade('spectrum', 4)">
-                                <div>每隔2秒自动购买最高红色等级</div>
-                                <div>未购买</div>
-                                <div>价格 5 光谱</div>
-                                <div></div>
-                            </div>
-                        </td>
-                        <td>
-                            <div id="spectrumButton5" class="button spec" onclick="buyUpgrade('spectrum', 5)">
-                                <div>每隔2秒自动购买最高绿色等级</div>
-                                <div>未购买</div>
-                                <div>价格 5 光谱</div>
-                                <div></div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div id="spectrumButton6" class="button spec" onclick="buyUpgrade('spectrum', 6)">
-                                <div>开始时蓝色已经解锁</div>
-                                <div>未购买</div>
-                                <div>价格 5 光谱</div>
-                                <div></div>
-                            </div>
-                        </td>
-                        <td>
-                            <div id="spectrumButton7" class="button spec" onclick="buyUpgrade('spectrum', 7)">
-                                <div>进度条获得升级比例每10个</div>
-                                <div>未购买</div>
-                                <div>价格 5 光谱</div>
-                                <div></div>
-                            </div>
-                        </td>
-                        <td>
-                            <div id="spectrumButton8" class="button spec" onclick="buyUpgrade('spectrum', 8)">
-                                <div>提升奖励每10个</div>
-                                <div>未购买</div>
-                                <div>价格 5 光谱</div>
-                                <div></div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div id="spectrumButton9" class="button spec" onclick="buyUpgrade('spectrum', 9)">
-                                <div>每隔2秒自动购买最高蓝色升级</div>
-                                <div>未购买</div>
-                                <div>价格 5 光谱</div>
-                                <div></div>
-                            </div>
-                        </td>
-                        <td>
-                            <div id="spectrumButton10" class="button spec" onclick="buyUpgrade('spectrum', 10)">
-                                <div>降低价格比例 (红&绿)</div>
-                                <div>未购买</div>
-                                <div>价格 5 光谱</div>
-                                <div></div>
-                            </div>
-                        </td>
-                        <td>
-                            <div id="spectrumButton11" class="button spec" onclick="buyUpgrade('spectrum', 11)">
-                                <div>基于红色等级的自动奖励</div>
-                                <div>未购买</div>
-                                <div>价格 5 光谱</div>
-                                <div></div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div id="spectrumButton12" class="button spec" onclick="buyUpgrade('spectrum', 12)">
-                                <div>自动奖励基于光谱</div>
-                                <div>未购买</div>
-                                <div>价格 5 光谱</div>
-                                <div></div>
-                            </div>
-                        </td>
-                        <td>
-                            <div id="spectrumButton13" class="button spec" onclick="buyUpgrade('spectrum', 13)">
-                                <div>更好的光谱增益公式</div>
-                                <div>未购买</div>
-                                <div>价格 5 光谱</div>
-                                <div></div>
-                            </div>
-                        </td>
-                        <td>
-                            <div id="spectrumButton14" class="button spec" onclick="buyUpgrade('spectrum', 14)">
-                                <div>切换到GPU渲染</div>
-                                <div>未购买</div>
-                                <div>价格 5 光谱</div>
-                                <div></div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="hidden">
-                        <td>
-                            <div id="spectrumButton15" class="button spec" onclick="buyUpgrade('spectrum', 15)">
-                                <div>你的棱镜可以创建光谱条</div>
-                                <div>未购买</div>
-                                <div>价格 5 光谱</div>
-                                <div></div>
-                            </div>
-                        </td>
-                        <td>
-                            <div id="spectrumButton16" class="button spec" onclick="buyUpgrade('spectrum', 16)">
-                                <div>增加蓝色 = 增加 红&绿 产量</div>
-                                <div>未购买</div>
-                                <div>价格 5 光谱</div>
-                                <div></div>
-                            </div>
-                        </td>
-                        <td>
-                            <div id="spectrumButton17" class="button spec" onclick="buyUpgrade('spectrum', 17)">
-                                <div>前三次蓝色升级降价基于 红&绿 等级</div>
-                                <div>未购买</div>
-                                <div>价格 5 光谱</div>
-                                <div></div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="hidden">
-                        <td>
-                            <div id="spectrumButton18" class="button spec" onclick="buyUpgrade('spectrum', 18)">
-                                <div>每7个潜能，黑色条的效力大幅增加</div>
-                                <div>未购买</div>
-                                <div>价格 5 光谱</div>
-                                <div></div>
-                            </div>
-                        </td>
-                        <td>
-                            <div id="spectrumButton19" class="button spec" onclick="buyUpgrade('spectrum', 19)">
-                                <div>谱的增益是平方的，斑点的增益是立方的</div>
-                                <div>未购买</div>
-                                <div>价格 5 光谱</div>
-                                <div></div>
-                            </div>
-                        </td>
-                        <td>
-                            <div id="spectrumButton20" class="button spec" onclick="buyUpgrade('spectrum', 20)">
-                                <div>黑色将在需要时用于购买红色和绿色升级</div>
-                                <div>未购买</div>
-                                <div>价格 5 光谱</div>
-                                <div></div>
-                            </div>
-                        </td>
-                    </tr>
+                    <tr><td><div id="spectrumButton0" class="button spec" onclick="buyUpgrade('spectrum', 0)"><div>自动点击效果加成</div><div>未购买</div><div>价格 5 光谱</div><div></div></div></td><td><div id="spectrumButton1" class="button spec" onclick="buyUpgrade('spectrum', 1)"><div>所有进度条双倍输出</div><div>未购买</div><div>Price 5 Spectrum</div><div></div></div></td><td><div id="spectrumButton2" class="button spec" onclick="buyUpgrade('spectrum', 2)"><div>进度条收益翻倍 (红&绿)</div><div>Not Bought</div><div>Price 5 Spectrum</div><div></div></div></td></tr>
+                    <tr><td><div id="spectrumButton3" class="button spec" onclick="buyUpgrade('spectrum', 3)"><div>点击加成只针对光谱重置</div><div>Not Bought</div><div>Price 5 Spectrum</div><div></div></div></td><td><div id="spectrumButton4" class="button spec" onclick="buyUpgrade('spectrum', 4)"><div>每隔2秒自动购买红色最高等级</div><div>Not Bought</div><div>Price 5 Spectrum</div><div></div></div></td><td><div id="spectrumButton5" class="button spec" onclick="buyUpgrade('spectrum', 5)"><div>每隔2秒自动购买绿色最高等级</div><div>Not Bought</div><div>Price 5 Spectrum</div><div></div></div></td></tr>
+                    <tr><td><div id="spectrumButton6" class="button spec" onclick="buyUpgrade('spectrum', 6)"><div>开局时蓝色已经解锁</div><div>Not Bought</div><div>Price 5 Spectrum</div><div></div></div></td><td><div id="spectrumButton7" class="button spec" onclick="buyUpgrade('spectrum', 7)"><div>每10个进度条获得升级比率</div><div>Not Bought</div><div>Price 5 Spectrum</div><div></div></div></td><td><div id="spectrumButton8" class="button spec" onclick="buyUpgrade('spectrum', 8)"><div>每10个提升奖励</div><div>Not Bought</div><div>Price 5 Spectrum</div><div></div></div></td></tr>
+                    <tr><td><div id="spectrumButton9" class="button spec" onclick="buyUpgrade('spectrum', 9)"><div>每隔2秒自动购买蓝色最高升级</div><div>Not bought</div><div>Price 5 Spectrum</div><div></div></div></td><td><div id="spectrumButton10" class="button spec" onclick="buyUpgrade('spectrum', 10)"><div>降低价格比率 (红&绿)</div><div>Not bought</div><div>Price 5 Spectrum</div><div></div></div></td><td><div id="spectrumButton11" class="button spec" onclick="buyUpgrade('spectrum', 11)"><div>基于红色等级的自动奖励</div><div>Not Bought</div><div>Price 5 Spectrum</div><div></div></div></td></tr>
+                    <tr><td><div id="spectrumButton12" class="button spec" onclick="buyUpgrade('spectrum', 12)"><div>基于光谱的自动奖励</div><div>Not bought</div><div>Price 5 Spectrum</div><div></div></div></td><td><div id="spectrumButton13" class="button spec" onclick="buyUpgrade('spectrum', 13)"><div>更好的光谱增益公式</div><div>Not Bought</div><div>Price 5 Spectrum</div><div></div></div></td><td><div id="spectrumButton14" class="button spec" onclick="buyUpgrade('spectrum', 14)"><div>切换到GPU渲染</div><div>Not Bought</div><div>Price 5 Spectrum</div><div></div></div></td></tr>
+                    <tr class="hidden"><td><div id="spectrumButton15" class="button spec" onclick="buyUpgrade('spectrum', 15)"><div>你的棱镜可以创建光谱条</div><div>Not bought</div><div>Price 5 Spectrum</div><div></div></div></td><td><div id="spectrumButton16" class="button spec" onclick="buyUpgrade('spectrum', 16)"><div>增加蓝色 = 增加 红&绿 产量</div><div>Not Bought</div><div>Price 5 Spectrum</div><div></div></div></td><td><div id="spectrumButton17" class="button spec" onclick="buyUpgrade('spectrum', 17)"><div>前三次蓝色升级降价基于 红&绿 等级</div><div>Not Bought</div><div>Price 5 Spectrum</div><div></div></div></td></tr>
+                    <tr class="hidden"><td><div id="spectrumButton18" class="button spec" onclick="buyUpgrade('spectrum', 18)"><div>每7个潜能，黑色条的效力大幅增加</div><div>Not bought</div><div>Price 5 Spectrum</div><div></div></div></td><td><div id="spectrumButton19" class="button spec" onclick="buyUpgrade('spectrum', 19)"><div>光谱的增益是平方的，斑点的增益是立方的</div><div>Not Bought</div><div>Price 5 Spectrum</div><div></div></div></td><td><div id="spectrumButton20" class="button spec" onclick="buyUpgrade('spectrum', 20)"><div>黑色将在需要时用于购买红色和绿色升级</div><div>Not Bought</div><div>Price 5 Spectrum</div><div></div></div></td></tr>
                 </table>
                 <div class="count hidden" id="newupgrades" style="width:80%;">新的升级项目将会出现在 e128 黑色</div>
             </div>
             <div id="tabPrism" class="tab">
                 <table align="center" style="margin-top:5px;table-layout:fixed">
-                    <tr id="redPrism">
-                        <td>
-                            <h1>1:</h1></td>
-                        <td>
-                            <div style="background-color:rgb(255,0,0)" class="prismColor"> </div>
-                        </td>
-                        <td>
-                            <input type="range" min="0" max="255" value="52" class="slider red" />
-                            <br />
-                            <input type="range" min="0" max="255" value="0" class="slider green" />
-                            <br />
-                            <input type="range" min="0" max="255" value="14" class="slider blue" />
-                        </td>
-                        <td style="font-size:25px;text-align:left;width:300px;"><span>红色: 0</span>
+                    <tr id="redPrism"><td><h1>1:</h1></td><td><div style="background-color:rgb(255,0,0)" class="prismColor"> </div> </td><td><input type="range" min="0" max="255" value="52" class="slider red" /><br /><input type="range" min="0" max="255" value="0" class="slider green" /><br /><input type="range" min="0" max="255" value="14" class="slider blue" /></td><td style="font-size:25px;text-align:left;width:300px;"><span>红色: 0</span>
                             <br><span>绿色: 0</span>
-                            <br><span>蓝色: 0</span></td>
-                    </tr>
-                    <tr id="greenPrism">
-                        <td>
-                            <h1>2:</h1></td>
-                        <td>
-                            <div style="background-color:rgb(0,255,0)" class="prismColor"> </div>
-                        </td>
-                        <td>
-                            <input type="range" min="0" max="255" value="26" class="slider red" />
-                            <br />
-                            <input type="range" min="0" max="255" value="52" class="slider green" />
-                            <br />
-                            <input type="range" min="0" max="255" value="14" class="slider blue" />
-                        </td>
-                        <td style="font-size:25px;text-align:left"><span>红色: 0</span>
+                            <br><span>蓝色: 0</span></td></tr>
+                    <tr id="greenPrism"><td><h1>2:</h1></td><td><div style="background-color:rgb(0,255,0)" class="prismColor"> </div></td><td><input type="range" min="0" max="255" value="26" class="slider red" /><br /><input type="range" min="0" max="255" value="52" class="slider green" /><br /><input type="range" min="0" max="255" value="14" class="slider blue" /></td><td style="font-size:25px;text-align:left"><span>红色: 0</span>
                             <br><span>绿色: 0</span>
-                            <br><span>蓝色: 0</span></td>
-                    </tr>
-                    <tr id="bluePrism">
-                        <td>
-                            <h1>3:</h1></td>
-                        <td>
-                            <div style="background-color:rgb(0,0,255)" class="prismColor"> </div>
-                        </td>
-                        <td>
-                            <input type="range" min="0" max="255" value="0" class="slider red" />
-                            <br />
-                            <input type="range" min="0" max="255" value="0" class="slider green" />
-                            <br />
-                            <input type="range" min="0" max="255" value="0" class="slider blue" />
-                        </td>
-                        <td style="font-size:25px;text-align:left"><span>红色: 0</span>
+                            <br><span>蓝色: 0</span></td></tr>
+                    <tr id="bluePrism"><td><h1>3:</h1></td><td><div style="background-color:rgb(0,0,255)" class="prismColor"> </div></td><td><input type="range" min="0" max="255" value="0" class="slider red" /><br /><input type="range" min="0" max="255" value="0" class="slider green" /><br /><input type="range" min="0" max="255" value="0" class="slider blue" /></td><td style="font-size:25px;text-align:left"><span>红色: 0</span>
                             <br><span>绿色: 0</span>
-                            <br><span>蓝色: 0</span></td>
-                    </tr>
+                            <br><span>蓝色: 0</span></td></tr>
                 </table>
                 <br />
                 <div>
-                    <div id="mixButton" class="button" style="background:white; text-shadow:none; color:black;margin-top:25px;" onclick="mix()">Create a New Spectrum Mix
-                        <br>
-                    </div>
+                    <div id="mixButton" class="button" style="background:white; text-shadow:none; color:black;margin-top:25px;" onclick="mix()">Create a New Spectrum Mix <br></div>
                     <div id="blackCount" class="count" style="text-align:center; width:90%;"></div>
                 </div>
                 <div id="potencydiv" class="hidden">
-                    <div id="potencyBtn" class="button" style="margin:25px;background-color:white;border:black inset 2px; width:25%" onclick="prismUpgrade('potency')">
-                        <div style="font-size:1.20em">Escape the loss of power. Remove your negative potency.</div>
-                        <br />
-                        <div style="font-size:0.75em">This requires you to channel 100 spectrum.</div>
-                    </div>
+                    <div id="potencyBtn" class="button" style="margin:25px;background-color:white;border:black inset 2px; width:25%" onclick="prismUpgrade('potency')"><div style="font-size:1.20em">Escape the loss of power. Remove your negative potency.</div><br /><div style="font-size:0.75em">This requires you to channel 100 spectrum.</div></div>
                     <br />
-                    <div class="button " id="redpot" style="background:white; text-shadow:none; color:black;height:100%;text-align:center">
-                        <div style="display:inline-block; vertical-align:central; margin-top:10px;float:left; width:75%;font-size:0.85em;line-height:150%;">The 1st bar's potency is currently <span class="amnt">0</span></div>
-                        <div style="width:20%; display:inline-block;font-size:35px;float:right"><span style="background-color:darkgreen; border-top-left-radius:5px;border-top-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('add','red')">+</span><span style="background-color:red;border-bottom-left-radius:5px;border-bottom-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('sub','red')">-</span></div>
-                    </div>
-                    <div class="button " id="greenpot" style="background:white; text-shadow:none; color:black;height:100%;text-align:center">
-                        <div style="display:inline-block; vertical-align:central; margin-top:10px;float:left; width:75%;font-size:0.85em;line-height:150%;">The 2nd bar's potency is currently <span class="amnt">0</span></div>
-                        <div style="width:20%; display:inline-block;font-size:35px;float:right"><span style="background-color:darkgreen; border-top-left-radius:5px;border-top-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('add','green')">+</span><span style="background-color:red;border-bottom-left-radius:5px;border-bottom-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('sub','green')">-</span></div>
-                    </div>
-                    <div class="button " id="bluepot" style="background:white; text-shadow:none; color:black;height:100%;text-align:center">
-                        <div style="display:inline-block; vertical-align:central; margin-top:10px;float:left; width:75%;font-size:0.85em;line-height:150%;">The 3rd bar's potency is currently <span class="amnt">0</span></div>
-                        <div style="width:20%; display:inline-block;font-size:35px;float:right"><span style="background-color:darkgreen; border-top-left-radius:5px;border-top-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('add','blue')">+</span><span style="background-color:red;border-bottom-left-radius:5px;border-bottom-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('sub','blue')">-</span></div>
-                    </div>
+                    <div class="button " id="redpot" style="background:white; text-shadow:none; color:black;height:100%;text-align:center"><div style="display:inline-block; vertical-align:central; margin-top:10px;float:left; width:75%;font-size:0.85em;line-height:150%;">The 1st bar's potency is currently <span class="amnt">0</span></div><div style="width:20%; display:inline-block;font-size:35px;float:right"><span style="background-color:darkgreen; border-top-left-radius:5px;border-top-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('add','red')">+</span><span style="background-color:red;border-bottom-left-radius:5px;border-bottom-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('sub','red')">-</span></div></div>
+                    <div class="button " id="greenpot" style="background:white; text-shadow:none; color:black;height:100%;text-align:center"><div style="display:inline-block; vertical-align:central; margin-top:10px;float:left; width:75%;font-size:0.85em;line-height:150%;">The 2nd bar's potency is currently <span class="amnt">0</span></div><div style="width:20%; display:inline-block;font-size:35px;float:right"><span style="background-color:darkgreen; border-top-left-radius:5px;border-top-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('add','green')">+</span><span style="background-color:red;border-bottom-left-radius:5px;border-bottom-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('sub','green')">-</span></div></div>
+                    <div class="button " id="bluepot" style="background:white; text-shadow:none; color:black;height:100%;text-align:center"><div style="display:inline-block; vertical-align:central; margin-top:10px;float:left; width:75%;font-size:0.85em;line-height:150%;">The 3rd bar's potency is currently <span class="amnt">0</span></div><div style="width:20%; display:inline-block;font-size:35px;float:right"><span style="background-color:darkgreen; border-top-left-radius:5px;border-top-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('add','blue')">+</span><span style="background-color:red;border-bottom-left-radius:5px;border-bottom-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('sub','blue')">-</span></div></div>
                     <br />
                     <div id="specpot" class="hidden">
                         <div class="button " style="background:white; text-shadow:none; color:black;height:100%;text-align:center" onclick="prismUpgrade('specbar','red')">Make spectrum bar! Costs 10 potency</div>
@@ -402,114 +100,39 @@
                         <div class="button " style="background:white; text-shadow:none; color:black;height:100%;text-align:center" onclick="prismUpgrade('specbar','blue')">Make spectrum bar! Costs 10 potency</div>
                     </div>
                     <br />
-                    <div class="button hidden" id="costReset" style="background:black; text-shadow:none; color:white;text-align:center;width:40%;margin:25px; border:groove;" onclick="prismUpgrade('cost')"><span>Reconfigure the prism to increase the maximum black it can process. </span>
-                        <br>
-                        <br> <span style="font-size:0.75em;" id="blackCostInfo">You are now ready to move on to a better prism! Pressing this button will reset you back to 1st prism, however you will retain log2(spectrum).</span></div>
+                    <div class="button hidden" id="costReset" style="background:black; text-shadow:none; color:white;text-align:center;width:40%;margin:25px; border:groove;" onclick="prismUpgrade('cost')"><span>Reconfigure the prism to increase the maximum black it can process. </span><br><br> <span style="font-size:0.75em;" id="blackCostInfo">You are now ready to move on to a better prism! Pressing this button will reset you back to 1st prism, however you will retain log2(spectrum).</span></div>
                 </div>
             </div>
             <div id="tabProgress" class="tab">
                 <table align="center" style="font-size:25px;border-collapse:collapse;border:inset;border-color:black;border-width:3px;" border="1" cellspacing="2" cellpadding="2">
                     <thead style="background-color:white">
-                        <tr>
-                            <td>Name</td>
-                            <td>Desc.</td>
-                            <td>Reward</td>
-                        </tr>
+                        <tr><td>Name</td><td>Desc.</td><td>Reward</td></tr>
                     </thead>
                     <tbody id="achieves">
-                        <tr>
-                            <td>And we're back!</td>
-                            <td>Reach spectrum once again!</td>
-                            <td>Unlock Potency Upgrades</td>
-                        </tr>
-                        <tr>
-                            <td>"Grinding ain't fun!" - Hunter</td>
-                            <td>Buy your first potency upgrade. ^^Unlocked here^^</td>
-                            <td>Advanced spectrum options(yay, long runs)</td>
-                        </tr>
-                        <tr>
-                            <td>Darkness I embrace you!</td>
-                            <td>Do a 3 black bar prism when having over 1e50 black</td>
-                            <td>Black gain is multiplied by core count</td>
-                        </tr>
-                        <tr>
-                            <td>Guess I'll have to do it myself!</td>
-                            <td>Prism with 1000 or more blackness without autobuyers or hotkeys</td>
-                            <td>Divides autobuyer interval by 8</td>
-                        </tr>
-                        <tr>
-                            <td>Ooh, half way there!</td>
-                            <td>Get all spliced color to have an exponent of exactly 128</td>
-                            <td>Auto splice each color once when you click the spectrum button</td>
-                        </tr>
-                        <tr>
-                            <td>Cores... who needs those!</td>
-                            <td>Reach e64 blue without buying a single core upgrade</td>
-                            <td>Spectrum gain is increase by 10% per core upgrade</td>
-                        </tr>
-                        <tr>
-                            <td>Tick tock, tick tock...</td>
-                            <td>You have to do something import...ant</td>
-                            <td>Get a free clock speed upgrade every 6 mins(capped at 10)</td>
-                        </tr>
-                        <tr>
-                            <td>Back to my roots!</td>
-                            <td>Create the same old Red, Green and Blue bars as initially</td>
-                            <td>Bars made of only 1 color produce a tiny bit of black</td>
-                        </tr>
-                        <tr>
-                            <td>Light flashes by you!</td>
-                            <td>A spectrum that creates over 1M Spectrum/sec</td>
-                            <td>Spectrum gain is multiplied by log10(mins)</td>
-                        </tr>
-                        <tr>
-                            <td>"It's not a phase, mom!" - Boo</td>
-                            <td>Switch between colored and black bars for 10 consecutive prisms</td>
-                            <td>Prod is increased by log10(black)</td>
-                        </tr>
-                        <tr>
-                            <td>The light always wins!</td>
-                            <td>Have your spectrum per second be higher than your black per second</td>
-                            <td>Spectrum bars are multiplied by log10(black)</td>
-                        </tr>
-                        <tr>
-                            <td>"The best color" - Omsi</td>
-                            <td>Get 1000 red lvls without producing any green</td>
-                            <td>Bars produce more based on how little of other colors the bar contains</td>
-                        </tr>
-                        <tr>
-                            <td>My soul has been devoured!</td>
-                            <td>Exceed e256 Blackness</td>
-                            <td>Blackness is not reset on prism creation</td>
-                        </tr>
-                        <tr>
-                            <td>Gimme MOAR spectrum</td>
-                            <td>Create a prism with 3 spectrum bars</td>
-                            <td>Every 5 potency now increase spectrum bars gain by 16x</td>
-                        </tr>
-                        <tr>
-                            <td>"YOU BROKE IT!!! again..." - Philipe</td>
-                            <td>Break your first prism</td>
-                            <td>Blackness denominator is reduced based on amount of broken prisms</td>
-                        </tr>
-                        <tr>
-                            <td>Look at my insane specs</td>
-                            <td>Reach 10k specced stat</td>
-                            <td>Specced multi effects spectrum bars with reduced effect.</td>
-                        </tr>
-                        <tr>
-                            <td>Am I playing RG?</td>
-                            <td>Finish an Adv. spectrum that lasts over 1 hour</td>
-                            <td>Adv. spec are 4x as strong(specced and spectrum)</td>
-                        </tr>
+                        <tr><td>And we're back!</td><td>Reach spectrum once again!</td><td>Unlock Potency Upgrades</td></tr>
+                        <tr><td>"Grinding ain't fun!" - Hunter</td><td>Buy your first potency upgrade. ^^Unlocked here^^</td><td>Advanced spectrum options(yay, long runs)</td></tr>
+                        <tr><td>Darkness I embrace you!</td><td>Do a 3 black bar prism when having over 1e50 black</td><td>Black gain is multiplied by core count</td></tr>
+                        <tr><td>Guess I'll have to do it myself!</td><td>Prism with 1000 or more blackness without autobuyers or hotkeys</td><td>Divides autobuyer interval by 8</td></tr>
+                        <tr><td>Ooh, half way there!</td><td>Get all spliced color to have an exponent of exactly 128</td><td>Auto splice each color once when you click the spectrum button</td></tr>
+                        <tr><td>Cores... who needs those!</td><td>Reach e64 blue without buying a single core upgrade</td><td>Spectrum gain is increase by 10% per core upgrade</td></tr>
+                        <tr><td>Tick tock, tick tock...</td><td>You have to do something import...ant</td><td>Get a free clock speed upgrade every 6 mins(capped at 10)</td></tr>
+                        <tr><td>Back to my roots!</td><td>Create the same old Red, Green and Blue bars as initially</td><td>Bars made of only 1 color produce a tiny bit of black</td></tr>
+                        <tr><td>Light flashes by you!</td><td>A spectrum that creates over 1M Spectrum/sec</td><td>Spectrum gain is multiplied by log10(mins)</td></tr>
+                        <tr><td>"It's not a phase, mom!" - Boo</td><td>Switch between colored and black bars for 10 consecutive prisms</td><td>Prod is increased by log10(black)</td></tr>
+                        <tr><td>The light always wins!</td><td>Have your spectrum per second be higher than your black per second</td><td>Spectrum bars are multiplied by log10(black)</td></tr>
+                        <tr><td>"The best color" - Omsi</td><td>Get 1000 red lvls without producing any green</td><td>Bars produce more based on how little of other colors the bar contains</td></tr>
+                        <tr><td>My soul has been devoured!</td><td>Exceed e256 Blackness</td><td>Blackness is not reset on prism creation</td></tr>
+                        <tr><td>Gimme MOAR spectrum</td><td>Create a prism with 3 spectrum bars</td><td>Every 5 potency now increase spectrum bars gain by 16x</td></tr>
+                        <tr><td>"YOU BROKE IT!!! again..." - Philipe</td><td>Break your first prism</td><td>Blackness denominator is reduced based on amount of broken prisms</td></tr>
+                        <tr><td>Look at my insane specs</td><td>Reach 10k specced stat</td><td>Specced multi effects spectrum bars with reduced effect.</td></tr>
+                        <tr><td>Am I playing RG?</td><td>Finish an Adv. spectrum that lasts over 1 hour</td><td>Adv. spec are 4x as strong(specced and spectrum)</td></tr>
                     </tbody>
-                </table>
+                </table>    
             </div>
         </div>
     </div>
     <div id="tabSettings" class="hidden tab">
-        <div class="count" style="text-align:center; width:90%;"> 设置</div>
-        <br>
+        <div class="count" style="text-align:center; width:90%;"> 设置</div><br>
         <div style="text-align:center">
             <table align="center">
                 <tr>
@@ -575,32 +198,24 @@
         </div>
     </div>
     <div id="tabStats" class="hidden tab" style="text-align:center">
-        <h1>最近5个光谱</h1>
+                <h1>最近5个光谱</h1>
+
         <table align="center" id="last5" style="font-size:25px">
-            <tr>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-            </tr>
+            <tr><td></td></tr>
+            <tr><td></td></tr>
+            <tr><td></td></tr>
+            <tr><td></td></tr>
+            <tr><td></td></tr>
         </table>
         <br>
-        <h1>重要信息</h1>
+                <h1>重要信息</h1>
+
         <div style="width:50%;margin-left:25%;">
-            <div style="font-size:25px" id="timestat">Times specced is currently x. This multiplies your spectrum gain by x.</div>
-            <div style="font-size:25px" id="specstat">Times specced is currently x. This multiplies your spectrum gain by x.</div>
+            <div style="font-size:25px" id="timestat">Times specced is  currently x. This multiplies your spectrum gain by x.</div>
+            <div style="font-size:25px" id="specstat">Times specced is  currently x. This multiplies your spectrum gain by x.</div>
         </div>
     </div>
-    <!--客服 开始-->
+        <!--客服 开始-->
     <script src="https://likexia.gitee.io/game/js/jquery.min.js"></script>
     <link rel="stylesheet" href="https://likexia.gitee.io/game/css/kf.css" type="text/css" media="screen" charset="utf-8">
     <script src="https://likexia.gitee.io/game/js/kf.js"></script>
@@ -611,6 +226,6 @@
 
     </style>
     <!-- 客服 结束 -->
-</body>
 
+</body>
 </html>

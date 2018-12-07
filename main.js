@@ -632,7 +632,7 @@ function buyUpgrade(name, Bindex) {
 function SUInfo(num){
     switch(num){
         case 0:
-            return "当前 CM: " + Math.max(Math.log10(player.CM), 1).toFixed(1) + "x";
+            return "当前点击加成: " + Math.max(Math.log10(player.CM), 1).toFixed(1) + "x";
         case 2:
             return "基础进度条提升: " + (2 + player.spectrumLevel[2] * 2) + "/256";
         case 4:
@@ -888,9 +888,9 @@ function setupPlayer() {
         document.getElementById("spectrumButton" + 4).childNodes[1].innerHTML = SUInfo(4);
         document.getElementById("spectrumButton" + 5).childNodes[1].innerHTML = SUInfo(5);
         document.getElementById("spectrumButton" + 9).childNodes[1].innerHTML = SUInfo(9);
-        document.getElementById("spectrumButton" + 4).childNodes[0].innerHTML = "每次自动购买最大红色等级每隔 " + formatNum(2 / (player.progress.includes(4) ? 8 : 1)) + "秒";
-        document.getElementById("spectrumButton" + 5).childNodes[0].innerHTML = "每次自动购买最大绿色等级每隔 " + formatNum(2 / (player.progress.includes(4) ? 8 : 1)) + "秒";
-        document.getElementById("spectrumButton" + 9).childNodes[0].innerHTML = "每次自动购买最大蓝色升级每隔 " + formatNum(2 / (player.progress.includes(4) ? 8 : 1)) + "秒";
+        document.getElementById("spectrumButton" + 4).childNodes[0].innerHTML = "自动购买最大红色等级每隔 " + formatNum(2 / (player.progress.includes(4) ? 8 : 1)) + "秒";
+        document.getElementById("spectrumButton" + 5).childNodes[0].innerHTML = "自动购买最大绿色等级每隔 " + formatNum(2 / (player.progress.includes(4) ? 8 : 1)) + "秒";
+        document.getElementById("spectrumButton" + 9).childNodes[0].innerHTML = "自动购买最大蓝色升级每隔 " + formatNum(2 / (player.progress.includes(4) ? 8 : 1)) + "秒";
         ABInt = { red: 2000 / (player.progress.includes(4) ? 8 : 1), green: 2000 / (player.progress.includes(4) ? 8 : 1), blue: 2000 / (player.progress.includes(4) ? 8 : 1)};
         player.CM = Math.max(player.CM, 1);
         let btn = document.getElementById('potencyBtn');
@@ -1200,7 +1200,7 @@ window.addEventListener("keyup", function (event) {
 }, false)
 
 function simulateTime(time) {
-    console.log("You were offline for " + formatTime(time));
+    console.log("你离线了 " + formatTime(time));
     player.spectrumTimer += time;
     player.sleepingTime += time;
     let bprod = [Log.div(Log.multi(auto, IR), 256), Log.div(Log.multi(Log.multi(auto, IR), IG), 65536), Log.div(Log.multi(Log.multi(Log.multi(auto, IR), IG), IB), 16777216)];
