@@ -178,7 +178,7 @@ var render = {
             document.getElementById("costReset").style.borderColor = 'white';
             document.getElementById("costReset").style.borderWidth = '5';
         } else {
-            document.getElementById("blackCostInfo").innerHTML = "Before you may destroy your " + suffix(player.prism.cost + 1) + " prism you must first conquer it using the power of the light. Get all bars to be completly white to fully overpower the darkness within the prism.";
+            document.getElementById("blackCostInfo").innerHTML = "在你摧毁你的 " + suffix(player.prism.cost + 1) + " 棱镜之前，你必须首先利用光的力量来征服它。 让所有的条纹都完全白色，以完全压倒棱镜内的黑暗。";
             document.getElementById("costReset").style.borderColor = 'black';
         }
         for (var i = 0; i < 3; i++) {
@@ -739,21 +739,21 @@ function CalcSRgain() {
                 if (player.progress.includes(17)) player.advSpec.gain = Log.multi(player.advSpec.gain, 4);
                 if (player.spectrumLevel[19] === 1) player.advSpec.gain = Log.pow(player.advSpec.gain, 2)
         if (player.advSpec.multi > 1) {
-            document.getElementById("spectrumReset").childNodes[0].innerHTML = "<b>Start Advanced Spectrum</b>";
+            document.getElementById("spectrumReset").childNodes[0].innerHTML = "<b>启动高级光谱</b>";
             document.getElementById("spectrumReset").childNodes[1].innerHTML = "";
             document.getElementById("spectrumReset").childNodes[2].innerHTML = formatTime(player.spectrumTimer * player.advSpec.multi)
             if (player.advSpec.active) {
-                document.getElementById("spectrumReset").childNodes[0].innerHTML = "<b>Advanced Spectrum Finishes in</b>";
+                document.getElementById("spectrumReset").childNodes[0].innerHTML = "<b>高级光谱完成时间</b>";
                 document.getElementById("spectrumReset").childNodes[2].innerHTML = formatTime(player.advSpec.time - player.spectrumTimer);
                 if (player.advSpec.time <= player.spectrumTimer) {
-                    document.getElementById("spectrumReset").childNodes[0].innerHTML = "Reset all progress and gain";
-                    document.getElementById("spectrumReset").childNodes[1].innerHTML = "<b>" + formatNum(player.advSpec.gain, 0) + " Spectrum</b>";
-                    document.getElementById("spectrumReset").childNodes[2].innerHTML = "Adv spectrum complete!";
+                    document.getElementById("spectrumReset").childNodes[0].innerHTML = "重置所有进度并获得";
+                    document.getElementById("spectrumReset").childNodes[1].innerHTML = "<b>" + formatNum(player.advSpec.gain, 0) + " 光谱</b>";
+                    document.getElementById("spectrumReset").childNodes[2].innerHTML = "高级光谱完成!";
                     document.getElementById("advSpectrumReset").childNodes[1].childNodes[0].value = player.advSpec.multi;
                 }
             }
         }
-        document.getElementById("advSpectrumReset").childNodes[2].innerHTML = formatNum(player.advSpec.gain, 0) + " Spectrum";
+        document.getElementById("advSpectrumReset").childNodes[2].innerHTML = formatNum(player.advSpec.gain, 0) + " 光谱";
     }
    
 }
@@ -895,7 +895,7 @@ function setupPlayer() {
         player.CM = Math.max(player.CM, 1);
         let btn = document.getElementById('potencyBtn');
         if (player.prism.potency.total > 0) {
-            btn.childNodes[0].innerHTML = '你拥有 ' + formatNum(player.prism.potency.points,0) + ' 潜能, out of a total of ' + formatNum(player.prism.potency.total,0);
+            btn.childNodes[0].innerHTML = '你拥有 ' + formatNum(player.prism.potency.points,0) + ' 潜能, 在总共 ' + formatNum(player.prism.potency.total,0);
             btn.childNodes[2].innerHTML = '提高效果 ' + formatNum(Math.pow(10, player.prism.potency.total/2 + 3), 0) + ' 光谱';
         } else {
             btn.childNodes[0].innerHTML = '逃避失去力量。 消除你的负面效果。';
