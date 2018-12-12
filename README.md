@@ -1,4 +1,4 @@
-# RGB放置（RGB Idle）
+# 红绿蓝放置（RGB Idle）
 
 ## 汉化版： http://likexia.gitee.io/rgb-idle
 
