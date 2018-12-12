@@ -190,7 +190,7 @@ var render = {
             row.cells[1].childNodes[0].style.backgroundColor = "rgb(" + Math.floor(row.cells[2].childNodes[0].value) + "," + Math.floor(row.cells[2].childNodes[2].value) + "," + Math.floor(row.cells[2].childNodes[4].value) + ")";
             var colors = ["Red: ", "Green: ", "Blue: "]
             if (row.cells[2].childNodes[0].value + row.cells[2].childNodes[2].value + row.cells[2].childNodes[4].value == 0) {
-                row.cells[3].innerHTML = "Black: <sup>" + formatNum(Log.multi(Log.multi(Log.multi(player.spectrum, player.spectrumLevel[18] === 1 ? Log.pow(player.prism.potencyEff[temp], Log.add(1,Log.floor(Log.div(player.prism.potency[temp],7)))) : player.prism.potencyEff[temp]), (player.spectrumLevel[1] + 1)), (player.progress.includes(3) ? Cores : 1)), 0) + "</sup>&frasl;<sub> " + formatNum(Log.max(Log.root(Log.multi(player.black, 1e100), 1 + Math.min(player.prism.cost / 10,0.5)), 1e100)) + "</sub>";
+                row.cells[3].innerHTML = "黑色: <sup>" + formatNum(Log.multi(Log.multi(Log.multi(player.spectrum, player.spectrumLevel[18] === 1 ? Log.pow(player.prism.potencyEff[temp], Log.add(1,Log.floor(Log.div(player.prism.potency[temp],7)))) : player.prism.potencyEff[temp]), (player.spectrumLevel[1] + 1)), (player.progress.includes(3) ? Cores : 1)), 0) + "</sup>&frasl;<sub> " + formatNum(Log.max(Log.root(Log.multi(player.black, 1e100), 1 + Math.min(player.prism.cost / 10,0.5)), 1e100)) + "</sub>";
                 blackBar = true;
             } else if (player.prism.specbar[temp]) {
                 if (player.progress.includes(14)) row.cells[3].innerHTML = "光谱: " + formatNum(Math.pow(16, Math.floor(player.prism.potency[temp] / 5)), 0) + "x log<sub>10</sub>(prod)";
@@ -199,7 +199,7 @@ var render = {
                 row.cells[3].innerHTML = "<span></span><br><span></span><br><span></span>";
                 var tempcount = 0;
                 for (var j = 0; j < 5; j += 2) {
-                    row.cells[3].childNodes[j].innerHTML = colors[j / 2] + formatNum(getColorPotency(Object.keys(player.money)[i], Math.floor(row.cells[2].childNodes[j].value),true), player.prism.potency[temp] === -1 ? 6 : 2);
+                    row.cells[3].childNodes[j].innerHTML = cnText(colors[j / 2]) + formatNum(getColorPotency(Object.keys(player.money)[i], Math.floor(row.cells[2].childNodes[j].value),true), player.prism.potency[temp] === -1 ? 6 : 2);
                     if (row.cells[2].childNodes[j].value === 0) tempcount++;
                 }
                 if (tempcount == 2) blackBar = true;
@@ -224,7 +224,7 @@ var render = {
         }
         mixCost = Log.sub(mixCost, 1);
         if (player.prism.active) document.getElementById("mixButton").innerHTML = "创建一个新的颜色组合<br>这将会花费: " + formatNum(mixCost, 2) + " 黑色";
-        else document.getElementById("mixButton").innerHTML = "Activate the Prism and Embrace its Power!";
+        else document.getElementById("mixButton").innerHTML = "激活棱镜并拥抱它的力量！";
     },
     Upgrades : function(){
         for (var i = 0; i < player.spectrumLevel.length ; i++) {
@@ -278,7 +278,7 @@ var render = {
             }
         }
         document.getElementById("spectrumCountRGB").innerHTML = formatNum(player.spectrum, 0) + " 光谱";
-        document.getElementById("blackCountRGB").innerHTML = formatNum(player.black) + " Black";
+        document.getElementById("blackCountRGB").innerHTML = formatNum(player.black) + " 黑色";
         for (var i = 0; i < 3; i++) for (var j = 0; j < 5; j += 2) document.getElementById(Object.keys(player.money)[i] + "Prism").cells[2].childNodes[j].value = player.bars[Object.keys(player.money)[i]].color[j / 2];
     },
     Spectrum: function () {
@@ -506,8 +506,8 @@ function prismUpgrade(type, name) {
     function updatePotency(all) {
         let btn = document.getElementById('potencyBtn');
         
-        btn.childNodes[0].innerHTML = 'You have ' + formatNum(player.prism.potency.points,0) + ' potency, out of a total of ' + formatNum(player.prism.potency.total,0);
-        btn.childNodes[2].innerHTML = 'Increase potency by 2 for ' + formatNum(Log.pow(10, player.prism.potency.total/2 + 3),0) + ' Spectrum';
+        btn.childNodes[0].innerHTML = '你拥有 ' + formatNum(player.prism.potency.points,0) + ' 潜能, 总共是 ' + formatNum(player.prism.potency.total,0);
+        btn.childNodes[2].innerHTML = '增加2点潜能消耗 ' + formatNum(Log.pow(10, player.prism.potency.total/2 + 3),0) + ' 光谱';
 
         if (name) {
             let pot = document.getElementById(name + 'pot');
@@ -1045,15 +1045,15 @@ function mix(PC) {
             } else return
         }
     }
-    if(!blackBar && !player.progress.includes(13)) if (!confirm("You are about to create a prism that has no way of creating blackness!\n Are you sure you want to do this?")) return;
-    if (!colorBar) if (!confirm("You are about to create a prism that has no production for colors(this means u can't fesible make black for next prism)!\n Are you sure you want to do this?")) return;
+    if(!blackBar && !player.progress.includes(13)) if (!confirm("你即将创造一种无法制造黑色的棱镜！\n你确定要这么做吗？")) return;
+    if (!colorBar) if (!confirm("你即将创建一个没有色彩生产的棱镜（这意味着你不能为下一个棱镜制作黑色）！\n你确定要这样做吗？")) return;
     if (Log.get(player.black ,"log") >= Log.get(mixCost,"log")) {
         pCheck(3);
         pCheck(4);
         mixReset();
         if (player.progress.includes(13)) player.black = Log.sub(player.black, mixCost);
         else player.black = new num(0);
-    } else if (Log.get(player.spectrum,"log") >= Log.get(Log.div(mixCost, Log.max(player.black,1)),"log") && confirm("Do you want to pay the missing blackness using Spectrum? \nThis will cost " + formatNum(Log.div(mixCost, Log.max(player.black,1)), 0) + " Spectrum. This will leave with "+ formatNum(Log.sub(player.spectrum, Log.div(mixCost, Log.max(player.black,1))),0) +" Spectrum.")) {
+    } else if (Log.get(player.spectrum,"log") >= Log.get(Log.div(mixCost, Log.max(player.black,1)),"log") && confirm("你想用光谱来补偿缺失的黑色吗? \n这将会花费 " + formatNum(Log.div(mixCost, Log.max(player.black,1)), 0) + " 光谱。 这将会留下 "+ formatNum(Log.sub(player.spectrum, Log.div(mixCost, Log.max(player.black,1))),0) +" 光谱.")) {
         pCheck(3);
         pCheck(4);
         player.spectrum = Log.sub(player.spectrum, Log.div(mixCost, Log.max(player.black, 1)));
@@ -1320,11 +1320,11 @@ function getColorPotency(name,color,prism) {
 function cnText(text){
     var cntext="";
     var temp=text;
-    if(temp=="red"){
+    if(temp=="red" || temp=="Red: "){
         cntext="红色"
-    }else if(temp=="green"){
+    }else if(temp=="green" || temp=="Green: "){
         cntext="绿色"
-    }else if(temp=="blue"){
+    }else if(temp=="blue" || temp=="Blue: "){
         cntext="蓝色"
     }else if(temp=="Scientific"){
         cntext="科学计数法"

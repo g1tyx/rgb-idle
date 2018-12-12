@@ -18,7 +18,7 @@
     <div class="popup">您已达到计算机可处理的颜色数量限制。 您现在可以改变这些颜色以变得不稳定，但允许您进一步增长。每个不稳定的颜色会减少一半自动购买者时间间隔。<br>点击此处继续</div>
     <div class="popup" style="font-size:1.5em">您的存档已复制到剪贴板！</div>
     <div class="popup" style="font-size:1.5em">你已经完成了一个进度！</div>
-    <div class="button switch active" onclick="switchTab('RGB', 0)">RGB</div><div class="button hidden switch" onclick="switchTab('Spectrum', 1)">光谱</div><div class="button switch" onclick="switchTab('Settings', 2)">设置</div><div class="button switch hidden" onclick="switchTab('Stats', 3)">统计</div><br>
+    <div class="button switch active" onclick="switchTab('RGB', 0)">红绿蓝</div><div class="button hidden switch" onclick="switchTab('Spectrum', 1)">光谱</div><div class="button switch" onclick="switchTab('Settings', 2)">设置</div><div class="button switch hidden" onclick="switchTab('Stats', 3)">统计</div><br>
     <div id="tabRGB" class="tab">
         <div style="width:100%;">
             <div class="count hidden extra" id="spectrumCountRGB"></div><div class="count hidden extra" id="blackCountRGB"></div>
@@ -86,48 +86,48 @@
                 </table>
                 <br />
                 <div>
-                    <div id="mixButton" class="button" style="background:white; text-shadow:none; color:black;margin-top:25px;" onclick="mix()">Create a New Spectrum Mix <br></div>
+                    <div id="mixButton" class="button" style="background:white; text-shadow:none; color:black;margin-top:25px;" onclick="mix()">创建一个新的光谱混合 <br></div>
                     <div id="blackCount" class="count" style="text-align:center; width:90%;"></div>
                 </div>
                 <div id="potencydiv" class="hidden">
-                    <div id="potencyBtn" class="button" style="margin:25px;background-color:white;border:black inset 2px; width:25%" onclick="prismUpgrade('potency')"><div style="font-size:1.20em">Escape the loss of power. Remove your negative potency.</div><br /><div style="font-size:0.75em">This requires you to channel 100 spectrum.</div></div>
+                    <div id="potencyBtn" class="button" style="margin:25px;background-color:white;border:black inset 2px; width:25%" onclick="prismUpgrade('potency')"><div style="font-size:1.20em">避免失去动力。消除你的负面影响。</div><br /><div style="font-size:0.75em">这将需要你100光谱</div></div>
                     <br />
-                    <div class="button " id="redpot" style="background:white; text-shadow:none; color:black;height:100%;text-align:center"><div style="display:inline-block; vertical-align:central; margin-top:10px;float:left; width:75%;font-size:0.85em;line-height:150%;">The 1st bar's potency is currently <span class="amnt">0</span></div><div style="width:20%; display:inline-block;font-size:35px;float:right"><span style="background-color:darkgreen; border-top-left-radius:5px;border-top-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('add','red')">+</span><span style="background-color:red;border-bottom-left-radius:5px;border-bottom-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('sub','red')">-</span></div></div>
-                    <div class="button " id="greenpot" style="background:white; text-shadow:none; color:black;height:100%;text-align:center"><div style="display:inline-block; vertical-align:central; margin-top:10px;float:left; width:75%;font-size:0.85em;line-height:150%;">The 2nd bar's potency is currently <span class="amnt">0</span></div><div style="width:20%; display:inline-block;font-size:35px;float:right"><span style="background-color:darkgreen; border-top-left-radius:5px;border-top-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('add','green')">+</span><span style="background-color:red;border-bottom-left-radius:5px;border-bottom-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('sub','green')">-</span></div></div>
-                    <div class="button " id="bluepot" style="background:white; text-shadow:none; color:black;height:100%;text-align:center"><div style="display:inline-block; vertical-align:central; margin-top:10px;float:left; width:75%;font-size:0.85em;line-height:150%;">The 3rd bar's potency is currently <span class="amnt">0</span></div><div style="width:20%; display:inline-block;font-size:35px;float:right"><span style="background-color:darkgreen; border-top-left-radius:5px;border-top-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('add','blue')">+</span><span style="background-color:red;border-bottom-left-radius:5px;border-bottom-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('sub','blue')">-</span></div></div>
+                    <div class="button " id="redpot" style="background:white; text-shadow:none; color:black;height:100%;text-align:center"><div style="display:inline-block; vertical-align:central; margin-top:10px;float:left; width:75%;font-size:0.85em;line-height:150%;">第1个条的潜力目前是 <span class="amnt">0</span></div><div style="width:20%; display:inline-block;font-size:35px;float:right"><span style="background-color:darkgreen; border-top-left-radius:5px;border-top-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('add','red')">+</span><span style="background-color:red;border-bottom-left-radius:5px;border-bottom-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('sub','red')">-</span></div></div>
+                    <div class="button " id="greenpot" style="background:white; text-shadow:none; color:black;height:100%;text-align:center"><div style="display:inline-block; vertical-align:central; margin-top:10px;float:left; width:75%;font-size:0.85em;line-height:150%;">第2个条的潜力目前是 <span class="amnt">0</span></div><div style="width:20%; display:inline-block;font-size:35px;float:right"><span style="background-color:darkgreen; border-top-left-radius:5px;border-top-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('add','green')">+</span><span style="background-color:red;border-bottom-left-radius:5px;border-bottom-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('sub','green')">-</span></div></div>
+                    <div class="button " id="bluepot" style="background:white; text-shadow:none; color:black;height:100%;text-align:center"><div style="display:inline-block; vertical-align:central; margin-top:10px;float:left; width:75%;font-size:0.85em;line-height:150%;">第3个条的潜力目前是 <span class="amnt">0</span></div><div style="width:20%; display:inline-block;font-size:35px;float:right"><span style="background-color:darkgreen; border-top-left-radius:5px;border-top-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('add','blue')">+</span><span style="background-color:red;border-bottom-left-radius:5px;border-bottom-right-radius:5px;width:100%;display:block" onclick="prismUpgrade('sub','blue')">-</span></div></div>
                     <br />
                     <div id="specpot" class="hidden">
-                        <div class="button " style="background:white; text-shadow:none; color:black;height:100%;text-align:center" onclick="prismUpgrade('specbar','red')">Make spectrum bar! Costs 10 potency</div>
-                        <div class="button " style="background:white; text-shadow:none; color:black;height:100%;text-align:center" onclick="prismUpgrade('specbar','green')">Make spectrum bar! Costs 10 potency</div>
-                        <div class="button " style="background:white; text-shadow:none; color:black;height:100%;text-align:center" onclick="prismUpgrade('specbar','blue')">Make spectrum bar! Costs 10 potency</div>
+                        <div class="button " style="background:white; text-shadow:none; color:black;height:100%;text-align:center" onclick="prismUpgrade('specbar','red')">制作光谱条！ 花费 10 潜能</div>
+                        <div class="button " style="background:white; text-shadow:none; color:black;height:100%;text-align:center" onclick="prismUpgrade('specbar','green')">制作光谱条！ 花费 10 潜能</div>
+                        <div class="button " style="background:white; text-shadow:none; color:black;height:100%;text-align:center" onclick="prismUpgrade('specbar','blue')">制作光谱条！ 花费 10 潜能</div>
                     </div>
                     <br />
-                    <div class="button hidden" id="costReset" style="background:black; text-shadow:none; color:white;text-align:center;width:40%;margin:25px; border:groove;" onclick="prismUpgrade('cost')"><span>Reconfigure the prism to increase the maximum black it can process. </span><br><br> <span style="font-size:0.75em;" id="blackCostInfo">You are now ready to move on to a better prism! Pressing this button will reset you back to 1st prism, however you will retain log2(spectrum).</span></div>
+                    <div class="button hidden" id="costReset" style="background:black; text-shadow:none; color:white;text-align:center;width:40%;margin:25px; border:groove;" onclick="prismUpgrade('cost')"><span>重新配置棱镜以增加它可以处理的最大黑色。 </span><br><br> <span style="font-size:0.75em;" id="blackCostInfo">你现在准备好进入更好的棱镜了！ 按此按钮将重置为第1个棱镜，但是您将保留log2（光谱）。</span></div>
                 </div>
             </div>
             <div id="tabProgress" class="tab">
                 <table align="center" style="font-size:25px;border-collapse:collapse;border:inset;border-color:black;border-width:3px;" border="1" cellspacing="2" cellpadding="2">
                     <thead style="background-color:white">
-                        <tr><td>Name</td><td>Desc.</td><td>Reward</td></tr>
+                        <tr><td>名称</td><td>介绍.</td><td>奖励</td></tr>
                     </thead>
                     <tbody id="achieves">
-                        <tr><td>And we're back!</td><td>Reach spectrum once again!</td><td>Unlock Potency Upgrades</td></tr>
-                        <tr><td>"Grinding ain't fun!" - Hunter</td><td>Buy your first potency upgrade. ^^Unlocked here^^</td><td>Advanced spectrum options(yay, long runs)</td></tr>
-                        <tr><td>Darkness I embrace you!</td><td>Do a 3 black bar prism when having over 1e50 black</td><td>Black gain is multiplied by core count</td></tr>
-                        <tr><td>Guess I'll have to do it myself!</td><td>Prism with 1000 or more blackness without autobuyers or hotkeys</td><td>Divides autobuyer interval by 8</td></tr>
-                        <tr><td>Ooh, half way there!</td><td>Get all spliced color to have an exponent of exactly 128</td><td>Auto splice each color once when you click the spectrum button</td></tr>
-                        <tr><td>Cores... who needs those!</td><td>Reach e64 blue without buying a single core upgrade</td><td>Spectrum gain is increase by 10% per core upgrade</td></tr>
-                        <tr><td>Tick tock, tick tock...</td><td>You have to do something import...ant</td><td>Get a free clock speed upgrade every 6 mins(capped at 10)</td></tr>
-                        <tr><td>Back to my roots!</td><td>Create the same old Red, Green and Blue bars as initially</td><td>Bars made of only 1 color produce a tiny bit of black</td></tr>
-                        <tr><td>Light flashes by you!</td><td>A spectrum that creates over 1M Spectrum/sec</td><td>Spectrum gain is multiplied by log10(mins)</td></tr>
-                        <tr><td>"It's not a phase, mom!" - Boo</td><td>Switch between colored and black bars for 10 consecutive prisms</td><td>Prod is increased by log10(black)</td></tr>
-                        <tr><td>The light always wins!</td><td>Have your spectrum per second be higher than your black per second</td><td>Spectrum bars are multiplied by log10(black)</td></tr>
-                        <tr><td>"The best color" - Omsi</td><td>Get 1000 red lvls without producing any green</td><td>Bars produce more based on how little of other colors the bar contains</td></tr>
-                        <tr><td>My soul has been devoured!</td><td>Exceed e256 Blackness</td><td>Blackness is not reset on prism creation</td></tr>
-                        <tr><td>Gimme MOAR spectrum</td><td>Create a prism with 3 spectrum bars</td><td>Every 5 potency now increase spectrum bars gain by 16x</td></tr>
-                        <tr><td>"YOU BROKE IT!!! again..." - Philipe</td><td>Break your first prism</td><td>Blackness denominator is reduced based on amount of broken prisms</td></tr>
-                        <tr><td>Look at my insane specs</td><td>Reach 10k specced stat</td><td>Specced multi effects spectrum bars with reduced effect.</td></tr>
-                        <tr><td>Am I playing RG?</td><td>Finish an Adv. spectrum that lasts over 1 hour</td><td>Adv. spec are 4x as strong(specced and spectrum)</td></tr>
+                        <tr><td>我们回来了！</td><td>再次达到光谱！</td><td>解锁潜能升级</td></tr>
+                        <tr><td>“研磨不好玩！” - 猎人</td><td>购买你的第一次潜能升级。 ^^在这里解锁了^^</td><td>高级频谱选项（耶，长期运行）</td></tr>
+                        <tr><td>黑暗我拥抱你！</td><td>当超过1e50黑色时，做3个黑色条形棱镜</td><td>黑色增益乘以核心数</td></tr>
+                        <tr><td>我猜我必须自己做！</td><td>没有自动购买者或热键的1000或更多黑色的棱镜</td><td>将自动购买者间隔除以8</td></tr>
+                        <tr><td>哦，中途到了！</td><td>获取所有拼接颜色，使其指数恰好为128</td><td>单击光谱按钮时，自动拼接每种颜色一次</td></tr>
+                        <tr><td>核心......谁需要那些！</td><td>未购买单核升级就达到e64蓝色</td><td>每个核心升级的光谱增益增加10％</td></tr>
+                        <tr><td>嘀嗒嘀嗒，嘀嗒......</td><td>你必须做一些重要的事情......蚂蚁</td><td>每6分钟获得一次免费时钟速度升级（上限为10）</td></tr>
+                        <tr><td>回到我的根！</td><td>最初创建相同的旧红色，绿色和蓝色条</td><td>仅由1种颜色制成的条形产生一点点黑色</td></tr>
+                        <tr><td>你闪烁的光芒！</td><td>创建超过1M 光谱/秒的频谱</td><td>光谱增益乘以log10(分钟)</td></tr>
+                        <tr><td>“这不是一个阶段，妈妈!”——嘘</td><td>在彩色和黑色条之间连续切换10个棱镜</td><td>产量增加log10（黑色）</td></tr>
+                        <tr><td>光明总是胜利的!</td><td>每秒的光谱高于每秒的黑色</td><td>光谱条乘以log10(黑色)</td></tr>
+                        <tr><td>"最好的颜色" -奥米斯</td><td>在不产生任何绿色的情况下获得1000等级的红色</td><td>条形根据条形图中包含的其他颜色的多少来产生更多</td></tr>
+                        <tr><td>我的灵魂被吞噬了！</td><td>超过e256黑暗</td><td>创建棱镜时不会重置黑暗</td></tr>
+                        <tr><td>给我摩尔光谱</td><td>创建一个带有3个光谱条的棱镜</td><td>现在每5个潜能增加光谱棒增益16x</td></tr>
+                        <tr><td>“你打破了它! ! !再一次……”——菲利普</td><td>打破你的第一个棱镜</td><td>基于破碎棱镜的数量减少黑色分母</td></tr>
+                        <tr><td>看看我疯狂的眼镜</td><td>达到10k斑点装置</td><td>光斑加成光谱条效果降低。</td></tr>
+                        <tr><td>我是不是打在RG？</td><td>完成一个进阶 光谱持续超过1小时</td><td>高级规格为4x(标准规格和光谱)</td></tr>
                     </tbody>
                 </table>    
             </div>
