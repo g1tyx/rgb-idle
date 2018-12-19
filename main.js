@@ -1010,9 +1010,12 @@ function reset(type, force) {
             if (!force) pCheck(1);
         }
     } else {
+        
+        if (confirm("此操作会删除你的游戏存档，相当于从零开始玩本游戏，\n你确定要这么做吗？")){
         resetplayer.bars = { red: new bar("red", 255, 0, 0, "redBar"), green: new bar("green", 0, 255, 0, "greenBar"), blue: new bar("blue", 0, 0, 255, "blueBar") };
          save('reset');
          document.location.reload(true);
+        }
     }
 }
 
