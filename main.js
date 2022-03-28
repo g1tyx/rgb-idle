@@ -652,7 +652,7 @@ function SUInfo(num){
         case 12:
             return "当前加成: " + formatNum(Log.max(Log.floor(player.spectrum),1), 0) + "x";
         case 14:
-            return "基础核心数量: " + (player.spectrumLevel[13] == 1 ? 8 : 1);
+            return "基础核心数量: " + (player.spectrumLevel[14] == 1 ? 8 : 1);
         case 16:
             return "蓝色提升: ~" + formatNum(Log.round(Log.div(IB,256)));
         default:
@@ -1048,8 +1048,8 @@ function mix(PC) {
             } else return
         }
     }
-    if(!blackBar && !player.progress.includes(13)) if (!confirm("你即将创造一种无法制造黑色的棱镜！\n你确定要这么做吗？")) return;
-    if (!colorBar) if (!confirm("你即将创建一个没有色彩生产的棱镜（这意味着你不能为下一个棱镜制作黑色）！\n你确定要这样做吗？")) return;
+    if(!blackBar && !player.progress.includes(13)) if (!confirm("您将要创建一个无法产生黑色的棱镜！\n您确定要这样做吗？")) return;
+    if (!colorBar) if (!confirm("你将要创建一个不产生颜色的棱镜（这意味着你不能为下一个棱镜制作黑色）！\n你确定要这样做吗？")) return;
     if (Log.get(player.black ,"log") >= Log.get(mixCost,"log")) {
         pCheck(3);
         pCheck(4);
